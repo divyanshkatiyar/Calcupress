@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Material 3 Scientific Calculator</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:linear-gradient(135deg,#d0e4ff,#ffe1ec);
+
+transition:.4s;
+
+}
+
+:root{
+
+--primary:#6750A4;
+--secondary:#625B71;
+--surface:#ffffff;
+--surface2:#f4efff;
+--text:#1d1b20;
+--accent:#7d5260;
+
+}
+
+.dark{
+
+--primary:#D0BCFF;
+--secondary:#CCC2DC;
+--surface:#1c1b1f;
+--surface2:#2a2930;
+--text:white;
+--accent:#efb8c8;
+
+background:#111;
+
+}
+
+.calc{
+
+width:420px;
+
+background:var(--surface);
+
+border-radius:35px;
+
+padding:20px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+
+}
+
+.top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:15px;
+
+}
+
+.title{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:var(--primary);
+
+}
+
+button.menu{
+
+width:45px;
+
+height:45px;
+
+border:none;
+
+border-radius:50%;
+
+background:var(--primary);
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+.display{
+
+background:var(--surface2);
+
+border-radius:25px;
+
+padding:20px;
+
+margin-bottom:15px;
+
+}
+
+.history{
+
+font-size:18px;
+
+color:gray;
+
+text-align:right;
+
+min-height:25px;
+
+}
+
+.result{
+
+font-size:35px;
+
+text-align:right;
+
+color:var(--text);
+
+word-wrap:break-word;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(5,1fr);
+
+gap:10px;
+
+}
+
+.btn{
+
+height:60px;
+
+border:none;
+
+border-radius:18px;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.2s;
+
+background:var(--surface2);
+
+color:var(--text);
+
+}
+
+.btn:hover{
+
+transform:scale(1.06);
+
+}
+
+.operator{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+.equal{
+
+background:#00a86b;
+
+color:white;
+
+}
+
+.func{
+
+background:#e8def8;
+
+}
+
+.dark .func{
+
+background:#453b55;
+
+}
+
+.menuBox{
+
+display:none;
+
+position:absolute;
+
+top:70px;
+
+right:20px;
+
+background:white;
+
+border-radius:15px;
+
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+
+overflow:hidden;
+
+}
+
+.menuBox button{
+
+width:180px;
+
+padding:14px;
+
+border:none;
+
+background:white;
+
+cursor:pointer;
+
+font-size:16px;
+
+text-align:left;
+
+}
+
+.menuBox button:hover{
+
+background:#eeeeee;
+
+}
+
+.converterSheet{
+
+position:fixed;
+
+left:0;
+
+right:0;
+
+bottom:-100%;
+
+background:var(--surface);
+
+border-radius:32px 32px 0 0;
+
+padding:20px;
+
+transition:.35s;
+
+box-shadow:0 -10px 30px rgba(0,0,0,.25);
+
+z-index:999;
+
+}
+
+.converterSheet.open{
+
+bottom:0;
+
+}
+
+.sheetHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:15px;
+
+}
+
+.sheetHeader button{
+
+border:none;
+
+background:none;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+.converterSheet select,
+.converterSheet input{
+
+width:100%;
+
+padding:14px;
+
+margin:10px 0;
+
+font-size:17px;
+
+border-radius:16px;
+
+border:none;
+
+background:var(--surface2);
+
+}
+
+.row{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+#result{
+
+margin-top:20px;
+
+font-size:28px;
+
+font-weight:bold;
+
+text-align:center;
+
+color:var(--primary);
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="calc">
+
+<div class="top">
+
+<div class="title">
+Scientific Calculator
+</div>
+
+<button class="menu" onclick="openConverter()">📏</button>
+
+<button class="menu" onclick="toggleMenu()">☰</button>
+
+</div>
+
+<div class="display">
+
+<div class="history" id="history"></div>
+
+<div class="result" id="display">0</div>
+
+</div>
+
+<div class="grid">
+
+<button class="btn func" onclick="clearDisplay()">AC</button>
+
+<button class="btn func" onclick="del()">⌫</button>
+
+<button class="btn func" onclick="insert('(')">(</button>
+
+<button class="btn func" onclick="insert(')')">)</button>
+
+<button class="btn operator" onclick="insert('/')">÷</button>
+
+<button class="btn func" onclick="calc('sin')">sin</button>
+
+<button class="btn func" onclick="calc('cos')">cos</button>
+
+<button class="btn func" onclick="calc('tan')">tan</button>
+
+<button class="btn func" onclick="calc('sqrt')">√</button>
+
+<button class="btn operator" onclick="insert('*')">×</button>
+
+<button class="btn" onclick="insert('7')">7</button>
+
+<button class="btn" onclick="insert('8')">8</button>
+
+<button class="btn" onclick="insert('9')">9</button>
+
+<button class="btn func" onclick="calc('log')">log</button>
+
+<button class="btn operator" onclick="insert('-')">−</button>
+
+<button class="btn" onclick="insert('4')">4</button>
+
+<button class="btn" onclick="insert('5')">5</button>
+
+<button class="btn" onclick="insert('6')">6</button>
+
+<button class="btn func" onclick="calc('ln')">ln</button>
+
+<button class="btn operator" onclick="insert('+')">+</button>
+
+<button class="btn" onclick="insert('1')">1</button>
+
+<button class="btn" onclick="insert('2')">2</button>
+
+<button class="btn" onclick="insert('3')">3</button>
+
+<button class="btn func" onclick="insert('**')">xʸ</button>
+
+<button class="btn equal" onclick="solve()">=</button>
+
+<button class="btn" onclick="insert('0')">0</button>
+
+<button class="btn" onclick="insert('.')">.</button>
+
+<button class="btn func" onclick="insert('Math.PI')">π</button>
+
+<button class="btn func" onclick="insert('Math.E')">e</button>
+
+<button class="btn func" onclick="calc('fact')">x!</button>
+
+</div>
+
+</div>
+
+<div class="menuBox" id="menu">
+
+<button onclick="theme()">
+🌙 Toggle Theme
+</button>
+
+<button onclick="clearDisplay()">
+🗑 Clear
+</button>
+
+</div>
+
+<div class="menuBox" id="menu">
+
+<button onclick="theme()">
+🌙 Toggle Theme
+</button>
+
+<button onclick="clearDisplay()">
+🗑 Clear
+</button>
+
+</div>
+
+<!-- Unit Converter -->
+
+<div id="converterSheet" class="converterSheet">
+
+<div class="sheetHeader">
+
+<h2>📏 Unit Converter</h2>
+
+<button onclick="closeConverter()">✕</button>
+
+</div>
+
+<select id="category" onchange="loadUnits()">
+
+<option>Length</option>
+<option>Area</option>
+<option>Mass</option>
+<option>Volume</option>
+<option>Temperature</option>
+<option>Speed</option>
+<option>Time</option>
+<option>Data</option>
+
+</select>
+
+<input
+type="number"
+id="inputValue"
+placeholder="Enter value"
+oninput="convert()">
+
+<div class="row">
+
+<select id="fromUnit" onchange="convert()"></select>
+
+<span>➡</span>
+
+<select id="toUnit" onchange="convert()"></select>
+
+</div>
+
+<div id="result">0</div>
+
+</div>
+
+<script>
+
+let expression="";
+
+function update(){
+
+document.getElementById("display").innerHTML=expression||0;
+
+}
+
+function insert(v){
+
+expression+=v;
+
+update();
+
+}
+
+function clearDisplay(){
+
+expression="";
+
+update();
+
+document.getElementById("history").innerHTML="";
+
+}
+
+function del(){
+
+expression=expression.slice(0,-1);
+
+update();
+
+}
+
+function solve(){
+
+try{
+
+let ans=eval(expression);
+
+document.getElementById("history").innerHTML=expression;
+
+expression=ans.toString();
+
+update();
+
+}
+
+catch{
+
+expression="Error";
+
+update();
+
+}
+
+}
+
+function calc(type){
+
+try{
+
+let value=parseFloat(expression);
+
+switch(type){
+
+case "sin":
+
+expression=Math.sin(value*Math.PI/180).toString();
+
+break;
+
+case "cos":
+
+expression=Math.cos(value*Math.PI/180).toString();
+
+break;
+
+case "tan":
+
+expression=Math.tan(value*Math.PI/180).toString();
+
+break;
+
+case "sqrt":
+
+expression=Math.sqrt(value).toString();
+
+break;
+
+case "log":
+
+expression=Math.log10(value).toString();
+
+break;
+
+case "ln":
+
+expression=Math.log(value).toString();
+
+break;
+
+case "fact":
+
+let f=1;
+
+for(let i=2;i<=value;i++)f*=i;
+
+expression=f.toString();
+
+break;
+
+}
+
+update();
+
+}
+
+catch{
+
+expression="Error";
+
+update();
+
+}
+
+}
+
+function toggleMenu(){
+
+let m=document.getElementById("menu");
+
+m.style.display=m.style.display=="block"?"none":"block";
+
+}
+
+function theme(){
+
+document.body.classList.toggle("dark");
+
+}
+
+const units={
+
+Length:{
+Meter:1,
+Kilometer:1000,
+Centimeter:0.01,
+Millimeter:0.001,
+Mile:1609.344,
+Yard:0.9144,
+Foot:0.3048,
+Inch:0.0254
+},
+
+Area:{
+"Square Meter":1,
+"Square Kilometer":1000000,
+Hectare:10000,
+Acre:4046.8564224,
+"Square Foot":0.092903,
+"Square Inch":0.00064516
+},
+
+Mass:{
+Kilogram:1,
+Gram:0.001,
+Milligram:0.000001,
+Tonne:1000,
+Pound:0.45359237,
+Ounce:0.0283495
+},
+
+Volume:{
+Liter:1,
+Milliliter:0.001,
+"Cubic Meter":1000,
+Gallon:3.78541,
+Cup:0.236588
+},
+
+Speed:{
+"m/s":1,
+"km/h":0.277778,
+mph:0.44704,
+Knot:0.514444
+},
+
+Time:{
+Second:1,
+Minute:60,
+Hour:3600,
+Day:86400,
+Week:604800
+},
+
+Data:{
+Bit:0.125,
+Byte:1,
+KB:1024,
+MB:1048576,
+GB:1073741824,
+TB:1099511627776
+}
+
+};
+
+function openConverter(){
+
+document.getElementById("converterSheet").classList.add("open");
+
+loadUnits();
+
+}
+
+function closeConverter(){
+
+document.getElementById("converterSheet").classList.remove("open");
+
+}
+
+function loadUnits(){
+
+let cat=document.getElementById("category").value;
+
+let from=document.getElementById("fromUnit");
+
+let to=document.getElementById("toUnit");
+
+from.innerHTML="";
+to.innerHTML="";
+
+if(cat==="Temperature"){
+
+["Celsius","Fahrenheit","Kelvin"].forEach(u=>{
+
+from.add(new Option(u,u));
+
+to.add(new Option(u,u));
+
+});
+
+return;
+
+}
+
+for(let u in units[cat]){
+
+from.add(new Option(u,u));
+
+to.add(new Option(u,u));
+
+}
+
+}
+
+function convert(){
+
+let cat=document.getElementById("category").value;
+
+let value=parseFloat(document.getElementById("inputValue").value);
+
+if(isNaN(value)) return;
+
+let from=document.getElementById("fromUnit").value;
+
+let to=document.getElementById("toUnit").value;
+
+let ans;
+
+if(cat==="Temperature"){
+
+if(from==="Celsius"){
+
+if(to==="Fahrenheit") ans=value*9/5+32;
+else if(to==="Kelvin") ans=value+273.15;
+else ans=value;
+
+}
+
+else if(from==="Fahrenheit"){
+
+if(to==="Celsius") ans=(value-32)*5/9;
+else if(to==="Kelvin") ans=(value-32)*5/9+273.15;
+else ans=value;
+
+}
+
+else{
+
+if(to==="Celsius") ans=value-273.15;
+else if(to==="Fahrenheit") ans=(value-273.15)*9/5+32;
+else ans=value;
+
+}
+
+}
+
+else{
+
+ans=value*units[cat][from]/units[cat][to];
+
+}
+
+document.getElementById("result").innerHTML=ans.toLocaleString(undefined,{
+maximumFractionDigits:10
+});
+
+}
+
+loadUnits();
+
+</script>
+
+</body>
+
+</html>
