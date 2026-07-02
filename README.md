@@ -1,5 +1,11 @@
 # 🧮 CalcuPress
 
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![Java](https://img.shields.io/badge/Java-OOP-red)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
 > A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
 
 CalcuPress combines an elegant Material You-inspired interface with powerful scientific calculations and an all-in-one unit converter, delivering a fast, responsive, and user-friendly experience—all without external libraries.
