@@ -7,7 +7,7 @@
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
 > A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
-<p align="center"> 
+<p align="left"> 
   <img src="CalcupressLightMode.jpg" width="220"/>
   <img src="CalcupressDarkMode.jpg" width="220"/>
   <img src="ConverterMenu.jpg" width="220"/>
