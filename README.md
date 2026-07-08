@@ -9,18 +9,17 @@
 > A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
 
 ---
-
-<p align="left"> 
-  <img src="CalcupressLightMode.jpg" width="220"/>
-  <img src="CalcupressDarkMode.jpg" width="220"/>
-  <img src="ConverterMenu.jpg" width="220"/>
-  <img src="DataConverter.jpg" width="220"/>
-  <img src="TimeConverter.jpg" width="220"/>
+<p align="left">
+  <img src="assets/CalcupressLightMode.jpg" width="220"/>
+  <img src="assets/CalcupressDarkMode.jpg" width="220"/>
+  <img src="assets/ConverterMenu.jpg" width="220"/>
+  <img src="assets/DataConverter.jpg" width="220"/>
+  <img src="assets/TimeConverter.jpg" width="220"/>
 </p>
 
 ---
 
-> CalcuPress combines an elegant Material You-inspired interface with powerful scientific calculations and an all-in-one unit converter, delivering a fast, responsive, and user-friendly experience—all without external libraries.
+> CalcuPress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a fast, responsive, and user-friendly experience—all without external libraries.
 
 ---
 
