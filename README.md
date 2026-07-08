@@ -10,11 +10,11 @@
 
 ---
 <p align="left">
-  <img src="CalcupressLightMode.jpg" width="220"/>
-  <img src="CalcupressDarkMode.jpg" width="220"/>
-  <img src="ConverterMenu.jpg" width="220"/>
-  <img src="DataConverter.jpg" width="220"/>
-  <img src="TimeConverter.jpg" width="220"/>
+  <img src="CalcupressLightMode.jpg" width="170"/>
+  <img src="CalcupressDarkMode.jpg" width="170"/>
+  <img src="ConverterMenu.jpg" width="170"/>
+  <img src="DataConverter.jpg" width="170"/>
+  <img src="TimeConverter.jpg" width="170"/>
 </p>
 
 ---
