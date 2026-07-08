@@ -10,7 +10,7 @@
 
 ---
 <p align="left">
-  <img src="assets/CalcupressLightMode.jpg" width="220"/>
+  <img src="main/assets/CalcupressLightMode.jpg" width="220"/>
   <img src="assets/CalcupressDarkMode.jpg" width="220"/>
   <img src="assets/ConverterMenu.jpg" width="220"/>
   <img src="assets/DataConverter.jpg" width="220"/>
