@@ -37,7 +37,6 @@
 - π Pi constant
 - e Euler's constant
 - Parentheses support
-- Calculation history
 
 ### 📏 Unit Converter
 > Convert between multiple categories:
@@ -60,7 +59,7 @@
 - 📏 Dedicated Unit Converter Panel
 - ⚡ Lightweight & Fast
 
-### 🗑 History
+### 🗑 Calculation History
 > Never loose your past work
 
 ---
