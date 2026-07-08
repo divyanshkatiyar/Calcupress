@@ -6,6 +6,8 @@
 ![Java](https://img.shields.io/badge/Java-OOP-red)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
+## 🌐 **Live Demo:** https://divyanshkatiyar.github.io/Calcupress/
+
 > A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
 
 ---
