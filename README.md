@@ -9,6 +9,7 @@
 > A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
 
 ---
+
 <p align="left">
   <img src="CalcupressLightMode.jpg" width="170"/>
   <img src="CalcupressDarkMode.jpg" width="170"/>
