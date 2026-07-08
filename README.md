@@ -40,7 +40,7 @@
 - Calculation history
 
 ### 📏 Unit Converter
-Convert between multiple categories:
+> Convert between multiple categories:
 
 - 📏 Length
 - 🟩 Area
@@ -59,6 +59,9 @@ Convert between multiple categories:
 - ☰ Modern Menu
 - 📏 Dedicated Unit Converter Panel
 - ⚡ Lightweight & Fast
+
+### 🗑 History
+> Never loose your past work
 
 ---
 
@@ -130,13 +133,13 @@ If you'd like to improve CalcuPress, feel free to fork the repository and submit
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+> This project is licensed under the **Apache 2.0** License.
 
 ---
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a ⭐ on GitHub.
+If you found this project useful, **consider giving it a ⭐** on GitHub.
 
 It helps the project reach more developers and motivates future improvements.
 
