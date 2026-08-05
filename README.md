@@ -41,7 +41,7 @@ Calcupress combines an elegant **Material You**-inspired interface with powerful
 - Parentheses support
 
 ### 📏 Unit Converter
-> Convert between multiple categories:
+Convert between multiple categories:
 
 - 📏 Length
 - 🟩 Area
@@ -57,24 +57,20 @@ Calcupress combines an elegant **Material You**-inspired interface with powerful
 - 📱 Responsive Design
 - 💫 Smooth Animations
 - 🎯 Rounded Material Components
-- ☰ Modern Menu
+- ☰ Modern Menus 
 - 📏 Dedicated Unit Converter Panel
 - ⚡ Lightweight & Fast
-
-### 🗑 Calculation History
-Never loose your past work
+- 🗑 Calculation History
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Tech Stack 
 
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
 
-No frameworks.
-No libraries.
-No dependencies.
+> No frameworks. No libraries. No dependencies.
 
 ---
 
@@ -122,9 +118,7 @@ This project is licensed under the **Apache 2.0** License.
 
 ## ⭐ Support
 
-If you found this project useful, **consider giving it a ⭐** on GitHub.
-
-It helps the project reach more developers and motivates future improvements.
+If you found this project useful, **consider giving it a ⭐** on GitHub to help the project reach more developers and motivates future improvements.
 
 ---
 <div align ="center">
