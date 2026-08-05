@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-## 🌐 **Live Demo:** https://divyanshkatiyar.github.io/Calcupress/
+## 🌐 **Live Demo:** **[Click Here](https://divyanshkatiyar.github.io/Calcupress/)**
 
 Modern **Material 3 Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
 
