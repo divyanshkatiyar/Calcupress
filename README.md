@@ -62,7 +62,7 @@ Calcupress combines an elegant **Material You**-inspired interface with powerful
 - ⚡ Lightweight & Fast
 
 ### 🗑 Calculation History
-> Never loose your past work
+Never loose your past work
 
 ---
 
@@ -116,7 +116,7 @@ If you'd like to improve CalcuPress, feel free to fork the repository and submit
 
 ## 📄 License
 
-> This project is licensed under the **Apache 2.0** License.
+This project is licensed under the **Apache 2.0** License.
 
 ---
 
@@ -127,5 +127,7 @@ If you found this project useful, **consider giving it a ⭐** on GitHub.
 It helps the project reach more developers and motivates future improvements.
 
 ---
-
-Made with ❤️ using HTML, CSS & JavaScript.
+<div align ="center">
+  
+**Made with ❤️ using HTML, CSS & JavaScript.**
+</div>
