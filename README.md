@@ -8,7 +8,7 @@
 
 ## 🌐 **Live Demo:** https://divyanshkatiyar.github.io/Calcupress/
 
-> A modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
+Modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
 
 ---
 
@@ -22,7 +22,7 @@
 
 ---
 
-> CalcuPress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a fast, responsive, and user-friendly experience—all without external libraries.
+Calcupress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a fast, responsive, and user-friendly experience—all without external libraries.
 
 ---
 
@@ -87,26 +87,6 @@ CalcuPress/
 ├── README.md
 └── LICENSE
 ```
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/CalcuPress.git
-```
-
-2. Open
-
-```
-index.html
-```
-
-in your preferred web browser.
-
-That's it! 🎉
 
 ---
 
