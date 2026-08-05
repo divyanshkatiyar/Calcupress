@@ -22,7 +22,7 @@ Modern **Material 3 Expressive Scientific Calculator & Unit Converter** built us
 
 ---
 
-Calcupress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a fast, responsive, and user-friendly experience—all without external libraries.
+Calcupress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a ⚡️ blazing-fast, lightweight, responsive, and user-friendly experience—all without external libraries.
 
 ---
 
@@ -58,8 +58,6 @@ Convert between multiple categories:
 - 💫 Smooth Animations
 - 🎯 Rounded Material Components
 - ☰ Modern Menus 
-- 📏 Dedicated Unit Converter Panel
-- ⚡ Lightweight & Fast
 - 🗑 Calculation History
 
 ---
