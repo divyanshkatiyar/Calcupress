@@ -86,6 +86,8 @@ CalcuPress/
 ├── index.html
 ├── README.md
 └── LICENSE
+└── manifest.json
+└── sw.js
 ```
 
 ---
