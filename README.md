@@ -8,7 +8,7 @@
 
 ## 🌐 **Live Demo:** https://divyanshkatiyar.github.io/Calcupress/
 
-Modern **Material 3 Expressive Scientific Calculator & Unit Converter** built with pure **HTML, CSS, and JavaScript**.
+Modern **Material 3 Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
 
 ---
 
