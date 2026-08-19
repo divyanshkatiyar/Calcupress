@@ -120,5 +120,5 @@ If you found this project useful, **consider giving it a ⭐** on GitHub to help
 ---
 <div align ="center">
   
-**Made with ❤️ using HTML, CSS & JavaScript.**
+**Built on android phone 📱 using HTML, CSS & JavaScript.**
 </div>
