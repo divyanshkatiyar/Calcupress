@@ -1,201 +1,140 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+PROPRIETARY SOFTWARE LICENSE & COPYRIGHT NOTICE
 
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+Copyright © 2026 Divyansh Katiyar. All Rights Reserved.
 
-   1. Definitions.
+Effective Date: 14 September 2026
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+1. COPYRIGHT OWNERSHIP
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+This Software, including its original source code, object code, scripts, architecture, documentation, original graphical elements, original textual content, and other original copyrightable materials, is protected by applicable copyright law, including the Copyright Act, 1957 of India, as amended from time to time.
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
-      "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+Except for expressly identified third-party materials, all copyright and other intellectual-property rights in the original materials comprising this Software are reserved by and remain with Divyansh Katiyar ("Copyright Holder").
 
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+Publication of this Software on GitHub or any other publicly accessible platform does not constitute a transfer, assignment, abandonment, or waiver of copyright ownership.
 
-      "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+2. NO GENERAL LICENSE
 
-      "Object" form shall mean any form resulting from mechanical
-      transformation or translation of a Source form, including but
-      not limited to compiled object code, generated documentation,
-      and conversions to other media types.
+Except for the limited permissions expressly stated in this Agreement, no license, authorization, ownership interest, or other right is granted to any person or entity in relation to the Software.
 
-      "Work" shall mean the work of authorship, whether in Source or
-      Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below).
+Access to, viewing of, or downloading of the repository does not by itself constitute permission to reproduce, distribute, commercially exploit, modify, or create derivative works from the Software.
 
-      "Derivative Works" shall mean any work, whether in Source or Object
-      form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications
-      represent, as a whole, an original work of authorship. For the purposes
-      of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,
-      the Work and Derivative Works thereof.
+3. LIMITED PERSONAL LICENSE
 
-      "Contribution" shall mean any work of authorship, including
-      the original version of the Work and any modifications or additions
-      to that Work or Derivative Works thereof, that is intentionally
-      submitted to Licensor for inclusion in the Work by the copyright owner
-      or by an individual or Legal Entity authorized to submit on behalf of
-      the copyright owner. For the purposes of this definition, "submitted"
-      means any form of electronic, verbal, or written communication sent
-      to the Licensor or its representatives, including but not limited to
-      communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the
-      Licensor for the purpose of discussing and improving the Work, but
-      excluding communication that is conspicuously marked or otherwise
-      designated in writing by the copyright owner as "Not a Contribution."
+Subject to compliance with this Agreement, the Copyright Holder grants a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Software solely for personal, private, research, demonstration, and educational purposes.
 
-      "Contributor" shall mean Licensor and any individual or Legal Entity
-      on behalf of whom a Contribution has been received by Licensor and
-      subsequently incorporated within the Work.
+This license does not grant permission for commercial exploitation.
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
-      Work and such Derivative Works in Source or Object form.
+4. PROHIBITED USES
 
-   3. Grant of Patent License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      (except as stated in this section) patent license to make, have made,
-      use, offer to sell, sell, import, and otherwise transfer the Work,
-      where such license applies only to those patent claims licensable
-      by such Contributor that are necessarily infringed by their
-      Contribution(s) alone or by combination of their Contribution(s)
-      with the Work to which such Contribution(s) was submitted. If You
-      institute patent litigation against any entity (including a
-      cross-claim or counterclaim in a lawsuit) alleging that the Work
-      or a Contribution incorporated within the Work constitutes direct
-      or contributory patent infringement, then any patent licenses
-      granted to You under this License for that Work shall terminate
-      as of the date such litigation is filed.
+Without prior written authorization from the Copyright Holder, no person or entity may, to the extent prohibited by applicable law:
 
-   4. Redistribution. You may reproduce and distribute copies of the
-      Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+1. reproduce or substantially reproduce the Software;
+2. distribute, publish, republish, or redistribute the Software;
+3. sell, license, sublicense, rent, lease, or otherwise commercially exploit the Software;
+4. incorporate substantial portions of the Software into another software product or service;
+5. create or distribute derivative works based upon the Software;
+6. remove, conceal, alter, or obscure copyright or proprietary notices;
+7. represent the Software or substantial portions thereof as independently created by another person;
+8. use substantial portions of the Software as the basis of a competing product or service;
+9. grant or purport to grant rights to third parties that the User does not possess under this Agreement; or
+10. otherwise exercise rights reserved exclusively to the Copyright Holder without authorization.
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+Nothing in this section shall prohibit conduct that cannot lawfully be restricted under applicable law.
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+5. COPYRIGHT NOTICE
 
-      (c) You must retain, in the Source form of any Derivative Works
-          that You distribute, all copyright, patent, trademark, and
-          attribution notices from the Source form of the Work,
-          excluding those notices that do not pertain to any part of
-          the Derivative Works; and
+All authorized copies of the Software or substantial portions thereof must retain the following notice:
 
-      (d) If the Work includes a "NOTICE" text file as part of its
-          distribution, then any Derivative Works that You distribute must
-          include a readable copy of the attribution notices contained
-          within such NOTICE file, excluding those notices that do not
-          pertain to any part of the Derivative Works, in at least one
-          of the following places: within a NOTICE text file distributed
-          as part of the Derivative Works; within the Source form or
-          documentation, if provided along with the Derivative Works; or,
-          within a display generated by the Derivative Works, if and
-          wherever such third-party notices normally appear. The contents
-          of the NOTICE file are for informational purposes only and
-          do not modify the License. You may add Your own attribution
-          notices within Derivative Works that You distribute, alongside
-          or as an addendum to the NOTICE text from the Work, provided
-          that such additional attribution notices cannot be construed
-          as modifying the License.
+Copyright © 2026 Divyansh Katiyar. All Rights Reserved.
 
-      You may add Your own copyright statement to Your modifications and
-      may provide additional or different license terms and conditions
-      for use, reproduction, or distribution of Your modifications, or
-      for any such Derivative Works as a whole, provided Your use,
-      reproduction, and distribution of the Work otherwise complies with
-      the conditions stated in this License.
+Removal or intentional alteration of copyright-management information may be subject to applicable legal restrictions.
 
-   5. Submission of Contributions. Unless You explicitly state otherwise,
-      any Contribution intentionally submitted for inclusion in the Work
-      by You to the Licensor shall be under the terms and conditions of
-      this License, without any additional terms or conditions.
-      Notwithstanding the above, nothing herein shall supersede or modify
-      the terms of any separate license agreement you may have executed
-      with Licensor regarding such Contributions.
+6. THIRD-PARTY COMPONENTS
 
-   6. Trademarks. This License does not grant permission to use the trade
-      names, trademarks, service marks, or product names of the Licensor,
-      except as required for reasonable and customary use in describing the
-      origin of the Work and reproducing the content of the NOTICE file.
+This Agreement applies only to materials owned or controlled by the Copyright Holder.
 
-   7. Disclaimer of Warranty. Unless required by applicable law or
-      agreed to in writing, Licensor provides the Work (and each
-      Contributor provides its Contributions) on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-      implied, including, without limitation, any warranties or conditions
-      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
-      PARTICULAR PURPOSE. You are solely responsible for determining the
-      appropriateness of using or redistributing the Work and assume any
-      risks associated with Your exercise of permissions under this License.
+The Software may contain or depend upon third-party libraries, frameworks, APIs, fonts, images, datasets, code, or other materials.
 
-   8. Limitation of Liability. In no event and under no legal theory,
-      whether in tort (including negligence), contract, or otherwise,
-      unless required by applicable law (such as deliberate and grossly
-      negligent acts) or agreed to in writing, shall any Contributor be
-      liable to You for damages, including any direct, indirect, special,
-      incidental, or consequential damages of any character arising as a
-      result of this License or out of the use or inability to use the
-      Work (including but not limited to damages for loss of goodwill,
-      work stoppage, computer failure or malfunction, or any and all
-      other commercial damages or losses), even if such Contributor
-      has been advised of the possibility of such damages.
+Such materials remain subject to their respective copyright notices and license terms. Nothing in this Agreement grants rights in third-party materials beyond the rights lawfully held by the Copyright Holder.
 
-   9. Accepting Warranty or Additional Liability. While redistributing
-      the Work or Derivative Works thereof, You may choose to offer,
-      and charge a fee for, acceptance of support, warranty, indemnity,
-      or other liability obligations and/or rights consistent with this
-      License. However, in accepting such obligations, You may act only
-      on Your own behalf and on Your sole responsibility, not on behalf
-      of any other Contributor, and only if You agree to indemnify,
-      defend, and hold each Contributor harmless for any liability
-      incurred by, or claims asserted against, such Contributor by reason
-      of your accepting any such warranty or additional liability.
+Where a third-party license grants rights broader than those granted under this Agreement, those rights shall apply only to the relevant third-party material.
 
-   END OF TERMS AND CONDITIONS
+7. OPEN-SOURCE COMPONENTS
 
-   APPENDIX: How to apply the Apache License to your work.
+Where any component is expressly identified as being distributed under an open-source license, that component remains governed by its applicable open-source license.
 
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "[]"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
+This Agreement shall not be interpreted as attempting to impose restrictions inconsistent with an applicable third-party open-source license.
 
-   Copyright [yyyy] [name of copyright owner]
+8. TRADEMARKS AND BRANDING
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+No right or license is granted to use the name "Divyansh Katiyar", associated logos, trademarks, service marks, trade names, branding, or other identifiers of the Copyright Holder except as separately authorized or permitted by applicable law.
 
-       http://www.apache.org/licenses/LICENSE-2.0
+9. NO WARRANTY
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT EXPRESS, IMPLIED, STATUTORY, OR OTHER WARRANTIES.
+
+THE COPYRIGHT HOLDER DISCLAIMS, TO THE MAXIMUM EXTENT PERMITTED BY LAW, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, ACCURACY, RELIABILITY, AVAILABILITY, SECURITY, AND ERROR-FREE OPERATION.
+
+10. USE AT USER'S OWN RISK
+
+The User is responsible for independently evaluating the Software before using, deploying, modifying, or integrating it.
+
+The Software is not represented as suitable for any particular purpose, environment, safety-critical application, regulated activity, or production system unless expressly stated otherwise by the Copyright Holder.
+
+11. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR FOR LOSS OF PROFITS, REVENUE, DATA, BUSINESS, GOODWILL, OR OTHER ECONOMIC LOSS ARISING OUT OF OR RELATING TO THE SOFTWARE OR THIS AGREEMENT.
+
+NOTHING IN THIS AGREEMENT SHALL EXCLUDE OR LIMIT LIABILITY TO THE EXTENT SUCH EXCLUSION OR LIMITATION IS PROHIBITED BY APPLICABLE LAW.
+
+12. TERMINATION
+
+Any permission granted under this Agreement shall automatically terminate upon a material violation of its terms.
+
+Following termination, the User shall cease uses that are no longer authorized and shall, where legally required, cease distribution and use of unauthorized copies.
+
+Termination shall not affect any rights, remedies, claims, or liabilities that accrued before termination.
+
+13. RESERVATION OF RIGHTS
+
+All rights not expressly granted under this Agreement are reserved.
+
+Nothing contained in this Agreement shall be interpreted as an assignment, transfer, waiver, abandonment, or relinquishment of copyright or other intellectual-property rights except where expressly stated in writing by the Copyright Holder.
+
+14. NO IMPLIED WAIVER
+
+Failure or delay by the Copyright Holder to enforce any provision of this Agreement shall not constitute a waiver of that provision or prevent subsequent enforcement.
+
+15. SEVERABILITY
+
+If any provision of this Agreement is determined by a competent authority to be invalid, unlawful, or unenforceable, that provision shall be enforced to the maximum extent legally permissible, and the remaining provisions shall continue in effect.
+
+16. AMENDMENTS
+
+The Copyright Holder may publish a revised version of this license for subsequent versions or releases of the Software.
+
+Unless expressly agreed otherwise, a revised license shall not retroactively revoke rights that were validly granted under a prior version.
+
+17. GOVERNING LAW AND JURISDICTION
+
+This Agreement shall be governed by the laws applicable in India, subject to mandatory provisions of applicable law.
+
+Any dispute concerning this Agreement or the Software shall be subject to the jurisdiction of courts having lawful jurisdiction over the relevant dispute and parties.
+
+18. STATUTORY RIGHTS
+
+Nothing in this Agreement is intended to exclude, restrict, or contractually override any right, remedy, exception, limitation, or obligation that cannot lawfully be excluded, restricted, or waived under applicable law.
+
+19. ENTIRE AGREEMENT
+
+This document constitutes the complete license terms governing the permissions granted by the Copyright Holder for the Software, except where a separate written agreement expressly supersedes or supplements these terms.
+
+---
+
+COPYRIGHT NOTICE
+
+Copyright © 2026 Divyansh Katiyar. All Rights Reserved.
+
+Unauthorized reproduction, distribution, commercial exploitation, or other use of protected portions of this Software without authorization may constitute copyright infringement or another violation of applicable law.
+
+END OF LICENSE
