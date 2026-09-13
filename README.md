@@ -109,7 +109,7 @@ If you'd like to improve CalcuPress, feel free to fork the repository and submit
 
 ## 📄 License
 
-Detailed license can be viewed *[here](https://github.com/divyanshkatiyar/Calcupress?tab=License-1-ov-file#)**.
+Detailed license can be viewed **[here](https://github.com/divyanshkatiyar/Calcupress?tab=License-1-ov-file#)**.
 
 ---
 
