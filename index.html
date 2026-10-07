@@ -217,11 +217,16 @@ button.menu-btn {
 }
 
 .equal {
-  grid-column: span 5;
+  grid-column: span 1;
   background: #00a86b;
   color: white;
   font-size: 22px;
   font-weight: bold;
+}
+
+.clear-btn {
+  background: #d32f2f;
+  color: white;
 }
 
 .func {
@@ -350,6 +355,7 @@ button.menu-btn {
     <div class="title" id="calcTitle">Scientific</div>
     <div class="top-buttons">
       <button class="menu-btn" onclick="openModeSheet()">MODE</button>
+      <button class="menu-btn" id="shiftBtn" onclick="toggleShift()">SHIFT</button>
       <button class="menu-btn" onclick="openConverter()">📏</button>
       <button class="menu-btn" id="menuBtn" onclick="toggleMenu(event)">☰</button>
     </div>
@@ -381,16 +387,16 @@ button.menu-btn {
   <!-- Main Clean Homescreen Keypad Grid (5x7 Layout) -->
   <div class="grid">
     <!-- Row 1 -->
-    <button class="btn func" onclick="clearDisplay()">AC</button>
+    <button class="btn clear-btn" onclick="clearDisplay()">AC</button>
     <button class="btn func" onclick="del()">⌫</button>
     <button class="btn func" onclick="insert('(')">(</button>
     <button class="btn func" onclick="insert(')')">)</button>
     <button class="btn operator" onclick="insert('÷')">÷</button>
 
     <!-- Row 2 -->
-    <button class="btn func" onclick="insert('sin(')">sin</button>
-    <button class="btn func" onclick="insert('cos(')">cos</button>
-    <button class="btn func" onclick="insert('tan(')">tan</button>
+    <button class="btn func" id="sinBtn" onclick="insert('sin(')">sin</button>
+    <button class="btn func" id="cosBtn" onclick="insert('cos(')">cos</button>
+    <button class="btn func" id="tanBtn" onclick="insert('tan(')">tan</button>
     <button class="btn func" onclick="insert('^')">xʸ</button>
     <button class="btn operator" onclick="insert('×')">×</button>
 
@@ -402,7 +408,7 @@ button.menu-btn {
     <button class="btn operator" onclick="insert('−')">−</button>
 
     <!-- Row 4 -->
-    <button class="btn func" onclick="insert('log(')">log</button>
+    <button class="btn func" id="logBtn" onclick="insert('log(')">log</button>
     <button class="btn" onclick="insert('4')">4</button>
     <button class="btn" onclick="insert('5')">5</button>
     <button class="btn" onclick="insert('6')">6</button>
@@ -423,6 +429,10 @@ button.menu-btn {
     <button class="btn func" onclick="insert('∫(')">∫</button>
 
     <!-- Row 7 -->
+    <button class="btn func" onclick="insert('!')">n!</button>
+    <button class="btn func" onclick="insert('e')">e</button>
+    <button class="btn func" onclick="insert('permutations(')">nPr</button>
+    <button class="btn func" onclick="insert('combinations(')">nCr</button>
     <button class="btn equal" onclick="solve()">=</button>
   </div>
 </div>
@@ -649,6 +659,7 @@ let expression = "";
 let evaluated = false;
 let isDegree = true;
 let currentMode = "COMP";
+let shiftState = 0;
 
 // Global Variable Storage Scope
 let globalScope = {
@@ -663,6 +674,73 @@ let matrixB = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 function toggleAngle() {
   isDegree = !isDegree;
   document.getElementById("angleBadge").innerText = isDegree ? "DEG" : "RAD";
+}
+
+function toggleShift() {
+  shiftState = (shiftState + 1) % 4;
+
+  const sinBtn = document.getElementById("sinBtn");
+  const cosBtn = document.getElementById("cosBtn");
+  const tanBtn = document.getElementById("tanBtn");
+  const logBtn = document.getElementById("logBtn");
+  const shiftBtn = document.getElementById("shiftBtn");
+
+  if (shiftState === 0) {
+    // Normal
+    sinBtn.innerText = "sin";
+    cosBtn.innerText = "cos";
+    tanBtn.innerText = "tan";
+    logBtn.innerText = "log";
+
+    sinBtn.onclick = () => insert("sin(");
+    cosBtn.onclick = () => insert("cos(");
+    tanBtn.onclick = () => insert("tan(");
+    logBtn.onclick = () => insert("log(");
+
+    shiftBtn.innerText = "SHIFT";
+
+  } else if (shiftState === 1) {
+    // Reciprocal / Modulus
+    sinBtn.innerText = "cosec";
+    cosBtn.innerText = "sec";
+    tanBtn.innerText = "cot";
+    logBtn.innerText = "|x|";
+
+    sinBtn.onclick = () => insert("csc(");
+    cosBtn.onclick = () => insert("sec(");
+    tanBtn.onclick = () => insert("cot(");
+    logBtn.onclick = () => insert("abs(");
+
+    shiftBtn.innerText = "SHIFT 1";
+
+  } else if (shiftState === 2) {
+    // Inverse
+    sinBtn.innerText = "sin⁻¹";
+    cosBtn.innerText = "cos⁻¹";
+    tanBtn.innerText = "tan⁻¹";
+    logBtn.innerText = "log";
+
+    sinBtn.onclick = () => insert("asin(");
+    cosBtn.onclick = () => insert("acos(");
+    tanBtn.onclick = () => insert("atan(");
+    logBtn.onclick = () => insert("log(");
+
+    shiftBtn.innerText = "SHIFT 2";
+
+  } else if (shiftState === 3) {
+    // Hyperbolic
+    sinBtn.innerText = "sinh";
+    cosBtn.innerText = "cosh";
+    tanBtn.innerText = "tanh";
+    logBtn.innerText = "log";
+
+    sinBtn.onclick = () => insert("sinh(");
+    cosBtn.onclick = () => insert("cosh(");
+    tanBtn.onclick = () => insert("tanh(");
+    logBtn.onclick = () => insert("log(");
+
+    shiftBtn.innerText = "SHIFT 3";
+  }
 }
 
 function update() {
@@ -1003,13 +1081,46 @@ function solve() {
 
     // Trigonometric Overrides for DEG/RAD
     const replacements = {};
+    
     ['sin', 'cos', 'tan', 'sec', 'csc', 'cot'].forEach(name => {
-      const fn = math[name];
-      replacements[name] = function(x) {
-        if (isDegree && typeof x === 'number') return fn(x * math.pi / 180);
-        return fn(x);
-      };
+    const fn = math[name];
+    
+    replacements[name] = function(x) {
+    if (isDegree && typeof x === 'number') {
+    return fn(x * math.pi / 180);
+    }
+    return fn(x);
+    };
     });
+    
+    // Inverse Trigonometric Functions
+    replacements.asin = function(x) {
+    const result = Math.asin(x);
+    return isDegree ? result * 180 / Math.PI : result;
+    };
+    
+    replacements.acos = function(x) {
+    const result = Math.acos(x);
+    return isDegree ? result * 180 / Math.PI : result;
+    };
+    
+    replacements.atan = function(x) {
+    const result = Math.atan(x);
+    return isDegree ? result * 180 / Math.PI : result;
+    };
+    
+    // Hyperbolic Trigonometric Functions
+    replacements.sinh = function(x) {
+    return Math.sinh(x);
+    };
+    
+    replacements.cosh = function(x) {
+    return Math.cosh(x);
+    };
+    
+    replacements.tanh = function(x) {
+    return Math.tanh(x);
+    };
 
     replacements.Pol = function(x, y) {
       let r = math.sqrt(x*x + y*y);
@@ -1419,4 +1530,4 @@ if ('serviceWorker' in navigator) {
 </script>
 
 </body>
-</html>
+  </html>
