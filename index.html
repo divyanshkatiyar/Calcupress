@@ -3,840 +3,1420 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Material 3 Scientific Calculator</title>
-
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#6750A4">
 
+<!-- Math.js for robust symbolic math, matrices, vectors & complex arithmetic -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:linear-gradient(135deg,#d0e4ff,#ffe1ec);
-
-transition:.4s;
-
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d0e4ff, #ffe1ec);
+  transition: .4s;
+  padding: 10px;
 }
 
-:root{
-
---primary:#6750A4;
---secondary:#625B71;
---surface:#ffffff;
---surface2:#f4efff;
---text:#1d1b20;
---accent:#7d5260;
-
+:root {
+  --primary: #6750A4;
+  --secondary: #625B71;
+  --surface: #ffffff;
+  --surface2: #f4efff;
+  --text: #1d1b20;
+  --accent: #7d5260;
+  --chip: #e8def8;
 }
 
-.dark{
-
---primary:#D0BCFF;
---secondary:#CCC2DC;
---surface:#1c1b1f;
---surface2:#2a2930;
---text:white;
---accent:#efb8c8;
-
-background:#111;
-
+.dark {
+  --primary: #D0BCFF;
+  --secondary: #CCC2DC;
+  --surface: #1c1b1f;
+  --surface2: #2a2930;
+  --text: white;
+  --accent: #efb8c8;
+  --chip: #453b55;
+  background: #111;
 }
 
-.calc{
-
-width:420px;
-
-background:var(--surface);
-
-border-radius:35px;
-
-padding:20px;
-
-box-shadow:0 20px 40px rgba(0,0,0,.2);
-
+.calc {
+  width: 440px;
+  background: var(--surface);
+  border-radius: 35px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+  position: relative;
 }
 
-.top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:15px;
-
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-.title{
-
-font-size:22px;
-
-font-weight:bold;
-
-color:var(--primary);
-
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
 }
 
-button.menu{
-
-width:45px;
-
-height:45px;
-
-border:none;
-
-border-radius:50%;
-
-background:var(--primary);
-
-color:white;
-
-font-size:20px;
-
-cursor:pointer;
-
+.top-buttons {
+  display: flex;
+  gap: 6px;
 }
 
-.display{
-
-background:var(--surface2);
-
-border-radius:25px;
-
-padding:20px;
-
-margin-bottom:15px;
-
+button.menu-btn {
+  height: 38px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 19px;
+  background: var(--primary);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.history{
-
-font-size:18px;
-
-color:gray;
-
-text-align:right;
-
-min-height:25px;
-
+.display {
+  position: relative;
+  background: var(--surface2);
+  border-radius: 25px;
+  padding: 25px 20px 15px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.result{
-
-font-size:35px;
-
-text-align:right;
-
-color:var(--text);
-
-word-wrap:break-word;
-
+.badge-row {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
 }
 
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(5,1fr);
-
-gap:10px;
-
+.badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--primary);
+  cursor: pointer;
+  background: rgba(103, 80, 164, 0.15);
+  padding: 4px 10px;
+  border-radius: 8px;
+  user-select: none;
 }
 
-.btn{
-
-height:60px;
-
-border:none;
-
-border-radius:18px;
-
-font-size:18px;
-
-cursor:pointer;
-
-transition:.2s;
-
-background:var(--surface2);
-
-color:var(--text);
-
+.dark .badge {
+  background: rgba(208, 188, 255, 0.15);
 }
 
-.btn:hover{
-
-transform:scale(1.06);
-
+.history {
+  font-size: 15px;
+  color: gray;
+  text-align: right;
+  min-height: 22px;
+  margin-bottom: 4px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-.operator{
-
-background:var(--primary);
-
-color:white;
-
+.result {
+  font-size: 28px;
+  text-align: right;
+  color: var(--text);
+  word-wrap: break-word;
+  min-height: 40px;
+  overflow-x: auto;
 }
 
-.equal{
-
-background:#00a86b;
-
-color:white;
-
+/* Variables & Registers Quick Bar */
+.var-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 
-.func{
-
-background:#e8def8;
-
+.var-bar button {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 10px;
+  background: var(--chip);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
 }
 
-.dark .func{
-
-background:#453b55;
-
+.var-bar button:hover {
+  filter: brightness(0.92);
 }
 
-.menuBox{
-
-display:none;
-
-position:absolute;
-
-top:70px;
-
-right:20px;
-
-background:white;
-
-border-radius:15px;
-
-box-shadow:0 10px 20px rgba(0,0,0,.2);
-
-overflow:hidden;
-
+/* Mode-Specific Sub-Toolbar */
+.mode-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
 }
 
-.menuBox button{
-
-width:180px;
-
-padding:14px;
-
-border:none;
-
-background:white;
-
-cursor:pointer;
-
-font-size:16px;
-
-text-align:left;
-
+.mode-bar button {
+  flex: 1;
+  white-space: nowrap;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.menuBox button:hover{
-
-background:#eeeeee;
-
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
 }
 
-.converterSheet{
-
-position:fixed;
-
-left:0;
-
-right:0;
-
-bottom:-100%;
-
-background:var(--surface);
-
-border-radius:32px 32px 0 0;
-
-padding:20px;
-
-transition:.35s;
-
-box-shadow:0 -10px 30px rgba(0,0,0,.25);
-
-z-index:999;
-
+.btn {
+  height: 48px;
+  border: none;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .15s;
+  background: var(--surface2);
+  color: var(--text);
 }
 
-.converterSheet.open{
-
-bottom:0;
-
+.btn:hover {
+  transform: scale(1.04);
 }
 
-.sheetHeader{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:15px;
-
+.operator {
+  background: var(--primary);
+  color: white;
 }
 
-.sheetHeader button{
-
-border:none;
-
-background:none;
-
-font-size:22px;
-
-cursor:pointer;
-
+.equal {
+  grid-column: span 5;
+  background: #00a86b;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
 }
 
-.converterSheet select,
-.converterSheet input{
-
-width:100%;
-
-padding:14px;
-
-margin:10px 0;
-
-font-size:17px;
-
-border-radius:16px;
-
-border:none;
-
-background:var(--surface2);
-
+.func {
+  background: var(--chip);
 }
 
-.row{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
+/* Dropdowns & Sheets */
+.menuBox {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: var(--surface);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.2);
+  overflow: hidden;
+  z-index: 100;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
-#result{
-
-margin-top:20px;
-
-font-size:28px;
-
-font-weight:bold;
-
-text-align:center;
-
-color:var(--primary);
-
+.menuBox button {
+  width: 180px;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  display: block;
 }
 
+.menuBox button:hover {
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  background: var(--surface);
+  border-radius: 28px 28px 0 0;
+  padding: 20px;
+  transition: .35s ease-in-out;
+  box-shadow: 0 -10px 30px rgba(0,0,0,.3);
+  z-index: 999;
+  max-height: 85vh;
+  overflow-y: auto;
+  color: var(--text);
+}
+
+.sheet.open {
+  bottom: 0;
+}
+
+.sheetHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sheetHeader h3 {
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.sheetHeader button {
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.sheet-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sheet select, .sheet input {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.matrix-grid, .vector-grid {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.m-row {
+  display: flex;
+  gap: 8px;
+}
+
+.m-row input {
+  text-align: center;
+}
+
+.sheet-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 5px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="calc">
+  <div class="top">
+    <div class="title" id="calcTitle">Scientific</div>
+    <div class="top-buttons">
+      <button class="menu-btn" onclick="openModeSheet()">MODE</button>
+      <button class="menu-btn" onclick="openConverter()">📏</button>
+      <button class="menu-btn" id="menuBtn" onclick="toggleMenu(event)">☰</button>
+    </div>
+  </div>
 
-<div class="top">
+  <div class="display">
+    <div class="badge-row">
+      <div class="badge" id="angleBadge" onclick="toggleAngle()">DEG</div>
+      <div class="badge" id="modeBadge">COMP</div>
+    </div>
+    <div class="history" id="history"></div>
+    <div class="result" id="display">0</div>
+  </div>
 
-<div class="title">
-Scientific Calculator
+  <!-- Quick Access Variables & Registers Strip -->
+  <div class="var-bar">
+    <button onclick="insert('x')">x</button>
+    <button onclick="insert('y')">y</button>
+    <button onclick="insert('z')">z</button>
+    <button onclick="insert('A')">A</button>
+    <button onclick="insert('B')">B</button>
+    <button onclick="insert('C')">C</button>
+    <button onclick="openVarSheet()" style="background:var(--primary); color:white;">STO</button>
+  </div>
+
+  <!-- Dynamic Toolbar for Specialized Modes -->
+  <div class="mode-bar" id="subToolBar" style="display:none;"></div>
+
+  <!-- Main Clean Homescreen Keypad Grid (5x7 Layout) -->
+  <div class="grid">
+    <!-- Row 1 -->
+    <button class="btn func" onclick="clearDisplay()">AC</button>
+    <button class="btn func" onclick="del()">⌫</button>
+    <button class="btn func" onclick="insert('(')">(</button>
+    <button class="btn func" onclick="insert(')')">)</button>
+    <button class="btn operator" onclick="insert('÷')">÷</button>
+
+    <!-- Row 2 -->
+    <button class="btn func" onclick="insert('sin(')">sin</button>
+    <button class="btn func" onclick="insert('cos(')">cos</button>
+    <button class="btn func" onclick="insert('tan(')">tan</button>
+    <button class="btn func" onclick="insert('^')">xʸ</button>
+    <button class="btn operator" onclick="insert('×')">×</button>
+
+    <!-- Row 3 -->
+    <button class="btn func" onclick="insert('√(')">√</button>
+    <button class="btn" onclick="insert('7')">7</button>
+    <button class="btn" onclick="insert('8')">8</button>
+    <button class="btn" onclick="insert('9')">9</button>
+    <button class="btn operator" onclick="insert('−')">−</button>
+
+    <!-- Row 4 -->
+    <button class="btn func" onclick="insert('log(')">log</button>
+    <button class="btn" onclick="insert('4')">4</button>
+    <button class="btn" onclick="insert('5')">5</button>
+    <button class="btn" onclick="insert('6')">6</button>
+    <button class="btn operator" onclick="insert('+')">+</button>
+
+    <!-- Row 5 -->
+    <button class="btn func" onclick="insert('ln(')">ln</button>
+    <button class="btn" onclick="insert('1')">1</button>
+    <button class="btn" onclick="insert('2')">2</button>
+    <button class="btn" onclick="insert('3')">3</button>
+    <button class="btn func" onclick="insert('d/dx(')">d/dx</button>
+
+    <!-- Row 6 -->
+    <button class="btn func" onclick="insert('π')">π</button>
+    <button class="btn" onclick="insert('0')">0</button>
+    <button class="btn" onclick="insert('.')">.</button>
+    <button class="btn func" onclick="insert(',')">,</button>
+    <button class="btn func" onclick="insert('∫(')">∫</button>
+
+    <!-- Row 7 -->
+    <button class="btn equal" onclick="solve()">=</button>
+  </div>
 </div>
 
-<button class="menu" onclick="openConverter()">📏</button>
-
-<button class="menu" onclick="toggleMenu()">☰</button>
-
-</div>
-
-<div class="display">
-
-<div class="history" id="history"></div>
-
-<div class="result" id="display">0</div>
-
-</div>
-
-<div class="grid">
-
-<button class="btn func" onclick="clearDisplay()">AC</button>
-
-<button class="btn func" onclick="del()">⌫</button>
-
-<button class="btn func" onclick="insert('(')">(</button>
-
-<button class="btn func" onclick="insert(')')">)</button>
-
-<button class="btn operator" onclick="insert('/')">÷</button>
-
-<button class="btn func" onclick="calc('sin')">sin</button>
-
-<button class="btn func" onclick="calc('cos')">cos</button>
-
-<button class="btn func" onclick="calc('tan')">tan</button>
-
-<button class="btn func" onclick="calc('sqrt')">√</button>
-
-<button class="btn operator" onclick="insert('*')">×</button>
-
-<button class="btn" onclick="insert('7')">7</button>
-
-<button class="btn" onclick="insert('8')">8</button>
-
-<button class="btn" onclick="insert('9')">9</button>
-
-<button class="btn func" onclick="calc('log')">log</button>
-
-<button class="btn operator" onclick="insert('-')">−</button>
-
-<button class="btn" onclick="insert('4')">4</button>
-
-<button class="btn" onclick="insert('5')">5</button>
-
-<button class="btn" onclick="insert('6')">6</button>
-
-<button class="btn func" onclick="calc('ln')">ln</button>
-
-<button class="btn operator" onclick="insert('+')">+</button>
-
-<button class="btn" onclick="insert('1')">1</button>
-
-<button class="btn" onclick="insert('2')">2</button>
-
-<button class="btn" onclick="insert('3')">3</button>
-
-<button class="btn func" onclick="insert('**')">xʸ</button>
-
-<button class="btn equal" onclick="solve()">=</button>
-
-<button class="btn" onclick="insert('0')">0</button>
-
-<button class="btn" onclick="insert('.')">.</button>
-
-<button class="btn func" onclick="insert('Math.PI')">π</button>
-
-<button class="btn func" onclick="insert('Math.E')">e</button>
-
-<button class="btn func" onclick="calc('fact')">x!</button>
-
-</div>
-
-</div>
-
+<!-- Main Top Dropdown Menu -->
 <div class="menuBox" id="menu">
-
-<button onclick="theme()">
-🌙 Toggle Theme
-</button>
-
-<button onclick="clearDisplay()">
-🗑 Clear
-</button>
-
+  <button onclick="theme()">🌙 Toggle Theme</button>
+  <button onclick="clearDisplay()">🗑 Clear Display</button>
 </div>
 
-<div class="menuBox" id="menu">
-
-<button onclick="theme()">
-🌙 Toggle Theme
-</button>
-
-<button onclick="clearDisplay()">
-🗑 Clear
-</button>
-
+<!-- Mode Selection Modal Sheet -->
+<div id="modeSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Select Calculator Mode</h3>
+    <button onclick="closeSheet('modeSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <button class="sheet-btn" onclick="switchMode('COMP')">1. COMP (Standard Scientific)</button>
+    <button class="sheet-btn" onclick="switchMode('CMPLX')">2. CMPLX (Complex Numbers)</button>
+    <button class="sheet-btn" onclick="switchMode('CALC')">3. CALC (Calculus & Integrals)</button>
+    <button class="sheet-btn" onclick="switchMode('MAT')">4. MATRIX (Matrix Algebra)</button>
+    <button class="sheet-btn" onclick="switchMode('VECT')">5. VECTOR (3D Vector Algebra)</button>
+    <button class="sheet-btn" onclick="switchMode('EQN')">6. EQN (Equation Solver)</button>
+  </div>
 </div>
 
-<!-- Unit Converter -->
+<!-- Definite Integral Modal Sheet -->
+<div id="defIntSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Definite Integration ∫ₐᵇ f(x) dx</h3>
+    <button onclick="closeSheet('defIntSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <label>Function f(x):</label>
+    <input type="text" id="def_f" placeholder="e.g. x^2 + sin(x)" value="x^2">
+    
+    <label>Variable:</label>
+    <input type="text" id="def_var" placeholder="x" value="x">
 
-<div id="converterSheet" class="converterSheet">
+    <div style="display:flex; gap:10px;">
+      <div style="flex:1;">
+        <label>Lower Limit (a):</label>
+        <input type="text" id="def_a" placeholder="0" value="0">
+      </div>
+      <div style="flex:1;">
+        <label>Upper Limit (b):</label>
+        <input type="text" id="def_b" placeholder="3" value="3">
+      </div>
+    </div>
 
-<div class="sheetHeader">
-
-<h2>📏 Unit Converter</h2>
-
-<button onclick="closeConverter()">✕</button>
-
+    <button class="sheet-btn" onclick="calcDefiniteIntegral()">Calculate Definite Integral</button>
+  </div>
 </div>
 
-<select id="category" onchange="loadUnits()">
+<!-- Indefinite Integral Modal Sheet -->
+<div id="indefIntSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Indefinite Integration ∫ f(x) dx</h3>
+    <button onclick="closeSheet('indefIntSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <label>Function f(x):</label>
+    <input type="text" id="indef_f" placeholder="e.g. 3*x^2 + 2*x + sin(x)" value="3*x^2 + 2*x">
+    
+    <label>Variable:</label>
+    <input type="text" id="indef_var" placeholder="x" value="x">
 
-<option>Length</option>
-<option>Area</option>
-<option>Mass</option>
-<option>Volume</option>
-<option>Temperature</option>
-<option>Speed</option>
-<option>Time</option>
-<option>Data</option>
-
-</select>
-
-<input
-type="number"
-id="inputValue"
-placeholder="Enter value"
-oninput="convert()">
-
-<div class="row">
-
-<select id="fromUnit" onchange="convert()"></select>
-
-<span>➡</span>
-
-<select id="toUnit" onchange="convert()"></select>
-
+    <button class="sheet-btn" onclick="calcIndefiniteIntegral()">Calculate Symbolic Integral</button>
+  </div>
 </div>
 
-<div id="result">0</div>
+<!-- Derivative Modal Sheet -->
+<div id="derivSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Derivative d/dx f(x)</h3>
+    <button onclick="closeSheet('derivSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <label>Function f(x):</label>
+    <input type="text" id="deriv_f" placeholder="e.g. x^3 + 2*x" value="x^3 + 2*x">
+    
+    <label>Variable:</label>
+    <input type="text" id="deriv_var" placeholder="x" value="x">
 
+    <label>Evaluate at Point x₀ (Optional):</label>
+    <input type="text" id="deriv_point" placeholder="e.g. 2 (Leave blank for symbolic derivative)">
+
+    <button class="sheet-btn" onclick="calcDerivative()">Calculate Derivative</button>
+  </div>
+</div>
+
+<!-- Variable & Storage Sheet -->
+<div id="varSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Variable & Constant Storage</h3>
+    <button onclick="closeSheet('varSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <p style="font-size:13px; color:gray;">Store numeric values into variables A, B, C, x, y, z.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div><label>x =</label><input type="number" id="v_x" value="0"></div>
+      <div><label>y =</label><input type="number" id="v_y" value="0"></div>
+      <div><label>z =</label><input type="number" id="v_z" value="0"></div>
+      <div><label>A =</label><input type="number" id="v_A" value="0"></div>
+      <div><label>B =</label><input type="number" id="v_B" value="0"></div>
+      <div><label>C =</label><input type="number" id="v_C" value="0"></div>
+    </div>
+    <button class="sheet-btn" onclick="saveVariables()">Save Variables</button>
+  </div>
+</div>
+
+<!-- Matrix Algebra Modal Sheet -->
+<div id="matrixSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Matrix Editor & Operations</h3>
+    <button onclick="closeSheet('matrixSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <label>Select Matrix:</label>
+    <select id="matrixTarget" onchange="renderMatrixEditor()">
+      <option value="A">Matrix A</option>
+      <option value="B">Matrix B</option>
+    </select>
+    
+    <div style="display:flex; gap:10px;">
+      <select id="mRows" onchange="renderMatrixEditor()">
+        <option value="2">2 Rows</option>
+        <option value="3" selected>3 Rows</option>
+      </select>
+      <select id="mCols" onchange="renderMatrixEditor()">
+        <option value="2">2 Cols</option>
+        <option value="3" selected>3 Cols</option>
+      </select>
+    </div>
+
+    <div id="matrixGridContainer"></div>
+
+    <button class="sheet-btn" onclick="saveMatrix()">Save Matrix</button>
+    <hr style="border: 0.5px solid var(--chip); margin: 5px 0;">
+    <button class="sheet-btn" style="background:var(--secondary);" onclick="execMatrixOp('det')">Determinant det(A)</button>
+    <button class="sheet-btn" style="background:var(--secondary);" onclick="execMatrixOp('inv')">Inverse A⁻¹</button>
+    <button class="sheet-btn" style="background:var(--secondary);" onclick="execMatrixOp('transpose')">Transpose Aᵀ</button>
+    <button class="sheet-btn" style="background:var(--secondary);" onclick="execMatrixOp('mult')">Multiply (A × B)</button>
+  </div>
+</div>
+
+<!-- Vector Algebra Modal Sheet -->
+<div id="vectorSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Vector Editor & Algebra</h3>
+    <button onclick="closeSheet('vectorSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <h4>Vector A [i, j, k]</h4>
+    <div style="display:flex; gap:6px;">
+      <input type="number" id="vA_x" placeholder="A_x" value="1">
+      <input type="number" id="vA_y" placeholder="A_y" value="2">
+      <input type="number" id="vA_z" placeholder="A_z" value="3">
+    </div>
+
+    <h4>Vector B [i, j, k]</h4>
+    <div style="display:flex; gap:6px;">
+      <input type="number" id="vB_x" placeholder="B_x" value="4">
+      <input type="number" id="vB_y" placeholder="B_y" value="5">
+      <input type="number" id="vB_z" placeholder="B_z" value="6">
+    </div>
+
+    <button class="sheet-btn" onclick="execVectorOp('dot')">Dot Product (A · B)</button>
+    <button class="sheet-btn" onclick="execVectorOp('cross')">Cross Product (A × B)</button>
+    <button class="sheet-btn" onclick="execVectorOp('norm')">Magnitude |A|</button>
+    <button class="sheet-btn" onclick="execVectorOp('angle')">Angle Between (A, B)</button>
+  </div>
+</div>
+
+<!-- Equation Solver Modal Sheet -->
+<div id="eqnSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>Equation Solver</h3>
+    <button onclick="closeSheet('eqnSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <select id="eqnType" onchange="renderEqnFields()">
+      <option value="quad">Quadratic (ax² + bx + c = 0)</option>
+      <option value="cubic">Cubic (ax³ + bx² + cx + d = 0)</option>
+      <option value="lin2">System of 2 Linear Equations (2x2)</option>
+    </select>
+
+    <div id="eqnInputs"></div>
+
+    <button class="sheet-btn" onclick="solveEquation()">Solve Equation</button>
+    <div id="eqnResult" style="font-weight:bold; font-size:16px; text-align:center; color:var(--primary); margin-top:10px;"></div>
+  </div>
+</div>
+
+<!-- Unit Converter Sheet -->
+<div id="converterSheet" class="sheet">
+  <div class="sheetHeader">
+    <h3>📏 Unit Converter</h3>
+    <button onclick="closeSheet('converterSheet')">✕</button>
+  </div>
+  <div class="sheet-content">
+    <select id="category" onchange="loadUnits()">
+      <option>Length</option>
+      <option>Area</option>
+      <option>Mass</option>
+      <option>Volume</option>
+      <option>Temperature</option>
+      <option>Speed</option>
+      <option>Time</option>
+      <option>Data</option>
+    </select>
+    <input type="number" id="inputValue" placeholder="Enter value" oninput="convert()">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <select id="fromUnit" onchange="convert()"></select>
+      <span>➡</span>
+      <select id="toUnit" onchange="convert()"></select>
+    </div>
+    <div id="unitResult" style="font-size:24px; font-weight:bold; text-align:center; color:var(--primary);">0</div>
+  </div>
 </div>
 
 <script>
-
-let expression="";
-
-function update(){
-
-document.getElementById("display").innerHTML=expression||0;
-
-}
-
-function insert(v){
-
-expression+=v;
-
-update();
-
-}
-
-function clearDisplay(){
-
-expression="";
-
-update();
-
-document.getElementById("history").innerHTML="";
-
-}
-
-function del(){
-
-expression=expression.slice(0,-1);
-
-update();
-
-}
-
-function solve(){
-
-try{
-
-let ans=eval(expression);
-
-document.getElementById("history").innerHTML=expression;
-
-expression=ans.toString();
-
-update();
-
-}
-
-catch{
-
-expression="Error";
-
-update();
-
-}
-
-}
-
-function calc(type){
-
-try{
-
-let value=parseFloat(expression);
-
-switch(type){
-
-case "sin":
-
-expression=Math.sin(value*Math.PI/180).toString();
-
-break;
-
-case "cos":
-
-expression=Math.cos(value*Math.PI/180).toString();
-
-break;
-
-case "tan":
-
-expression=Math.tan(value*Math.PI/180).toString();
-
-break;
-
-case "sqrt":
-
-expression=Math.sqrt(value).toString();
-
-break;
-
-case "log":
-
-expression=Math.log10(value).toString();
-
-break;
-
-case "ln":
-
-expression=Math.log(value).toString();
-
-break;
-
-case "fact":
-
-let f=1;
-
-for(let i=2;i<=value;i++)f*=i;
-
-expression=f.toString();
-
-break;
-
-}
-
-update();
-
-}
-
-catch{
-
-expression="Error";
-
-update();
-
-}
-
-}
-
-function toggleMenu(){
-
-let m=document.getElementById("menu");
-
-m.style.display=m.style.display=="block"?"none":"block";
-
-}
-
-function theme(){
-
-document.body.classList.toggle("dark");
-
-}
-
-const units={
-
-Length:{
-Meter:1,
-Kilometer:1000,
-Centimeter:0.01,
-Millimeter:0.001,
-Mile:1609.344,
-Yard:0.9144,
-Foot:0.3048,
-Inch:0.0254
-},
-
-Area:{
-"Square Meter":1,
-"Square Kilometer":1000000,
-Hectare:10000,
-Acre:4046.8564224,
-"Square Foot":0.092903,
-"Square Inch":0.00064516
-},
-
-Mass:{
-Kilogram:1,
-Gram:0.001,
-Milligram:0.000001,
-Tonne:1000,
-Pound:0.45359237,
-Ounce:0.0283495
-},
-
-Volume:{
-Liter:1,
-Milliliter:0.001,
-"Cubic Meter":1000,
-Gallon:3.78541,
-Cup:0.236588
-},
-
-Speed:{
-"m/s":1,
-"km/h":0.277778,
-mph:0.44704,
-Knot:0.514444
-},
-
-Time:{
-Second:1,
-Minute:60,
-Hour:3600,
-Day:86400,
-Week:604800
-},
-
-Data:{
-Bit:0.125,
-Byte:1,
-KB:1024,
-MB:1048576,
-GB:1073741824,
-TB:1099511627776
-}
-
+let expression = "";
+let evaluated = false;
+let isDegree = true;
+let currentMode = "COMP";
+
+// Global Variable Storage Scope
+let globalScope = {
+  x: 0, y: 0, z: 0,
+  A: 0, B: 0, C: 0
 };
 
-function openConverter(){
+// Matrices & Vectors storage
+let matrixA = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+let matrixB = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-document.getElementById("converterSheet").classList.add("open");
-
-loadUnits();
-
+function toggleAngle() {
+  isDegree = !isDegree;
+  document.getElementById("angleBadge").innerText = isDegree ? "DEG" : "RAD";
 }
 
-function closeConverter(){
-
-document.getElementById("converterSheet").classList.remove("open");
-
+function update() {
+  document.getElementById("display").innerHTML = expression || "0";
 }
 
-function loadUnits(){
+function insert(v) {
+  if (expression === "Error") expression = "";
+  if (evaluated) {
+    if (['+', '−', '×', '÷', '^', '!'].includes(v)) {
+      evaluated = false;
+    } else {
+      expression = "";
+      evaluated = false;
+    }
+  }
+  expression += v;
+  update();
+}
 
-let cat=document.getElementById("category").value;
+function clearDisplay() {
+  expression = "";
+  evaluated = false;
+  update();
+  document.getElementById("history").innerHTML = "";
+}
 
-let from=document.getElementById("fromUnit");
+function del() {
+  if (expression === "Error") {
+    clearDisplay();
+  } else {
+    expression = expression.slice(0, -1);
+    update();
+  }
+}
 
-let to=document.getElementById("toUnit");
+// Switch Calculator Modes
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById("modeBadge").innerText = mode;
+  document.getElementById("calcTitle").innerText = mode === "COMP" ? "Scientific" : mode;
+  closeSheet('modeSheet');
+  
+  const tb = document.getElementById("subToolBar");
+  tb.innerHTML = "";
+  tb.style.display = "flex";
 
-from.innerHTML="";
-to.innerHTML="";
+  if (mode === "COMP") {
+    tb.style.display = "none";
+  } else if (mode === "CMPLX") {
+    tb.innerHTML = `
+      <button onclick="insert('i')">i</button>
+      <button onclick="insert('arg(')">arg(z)</button>
+      <button onclick="insert('conj(')">conj(z)</button>
+      <button onclick="insert('abs(')">abs(z)</button>
+      <button onclick="insert('Pol(')">Pol</button>
+      <button onclick="insert('Rec(')">Rec</button>
+    `;
+  } else if (mode === "CALC") {
+    tb.innerHTML = `
+      <button onclick="openDefIntSheet()">∫ₐᵇ (Definite)</button>
+      <button onclick="openIndefIntSheet()">∫ dx (Symbolic)</button>
+      <button onclick="openDerivSheet()">d/dx (Derivative)</button>
+    `;
+  } else if (mode === "MAT") {
+    tb.innerHTML = `
+      <button onclick="openMatrixEditor()">Edit Matrices</button>
+      <button onclick="insert('MatA')">MatA</button>
+      <button onclick="insert('MatB')">MatB</button>
+      <button onclick="execMatrixOp('det')">det(A)</button>
+    `;
+  } else if (mode === "VECT") {
+    tb.innerHTML = `
+      <button onclick="openVectorEditor()">Edit Vectors</button>
+      <button onclick="execVectorOp('dot')">A · B</button>
+      <button onclick="execVectorOp('cross')">A × B</button>
+    `;
+  } else if (mode === "EQN") {
+    tb.innerHTML = `
+      <button onclick="openEqnSolver()">Open Equation Solver</button>
+    `;
+    openEqnSolver();
+  }
+}
 
-if(cat==="Temperature"){
+/* =========================================================
+   SYMBOLIC INTEGRATION ENGINE (AST Traversal)
+   ========================================================= */
+function integrateNode(node, varName = 'x') {
+  if (!node) return math.parse('0');
 
-["Celsius","Fahrenheit","Kelvin"].forEach(u=>{
+  if (node.isConstantNode) {
+    if (node.value === 0) return math.parse('0');
+    return new math.OperatorNode('*', 'multiply', [node, new math.SymbolNode(varName)]);
+  }
 
-from.add(new Option(u,u));
+  if (node.isSymbolNode) {
+    if (node.name === varName) {
+      return math.parse(`(${varName}^2) / 2`);
+    } else if (node.name === 'e') {
+      return math.parse(`e * ${varName}`);
+    } else if (node.name === 'pi') {
+      return math.parse(`pi * ${varName}`);
+    } else {
+      return new math.OperatorNode('*', 'multiply', [node, new math.SymbolNode(varName)]);
+    }
+  }
 
-to.add(new Option(u,u));
+  if (node.isParenthesisNode) {
+    return new math.ParenthesisNode(integrateNode(node.content, varName));
+  }
 
+  if (node.isOperatorNode) {
+    if (node.isBinary() && (node.op === '+' || node.op === '-')) {
+      return new math.OperatorNode(node.op, node.fn, [
+        integrateNode(node.args[0], varName),
+        integrateNode(node.args[1], varName)
+      ]);
+    }
+
+    if (node.isUnary() && node.op === '-') {
+      return new math.OperatorNode('-', 'unaryMinus', [integrateNode(node.args[0], varName)]);
+    }
+
+    if (node.op === '*') {
+      const leftHasVar = hasVariable(node.args[0], varName);
+      const rightHasVar = hasVariable(node.args[1], varName);
+
+      if (!leftHasVar && rightHasVar) {
+        return new math.OperatorNode('*', 'multiply', [node.args[0], integrateNode(node.args[1], varName)]);
+      }
+      if (leftHasVar && !rightHasVar) {
+        return new math.OperatorNode('*', 'multiply', [integrateNode(node.args[0], varName), node.args[1]]);
+      }
+      if (!leftHasVar && !rightHasVar) {
+        return new math.OperatorNode('*', 'multiply', [node, new math.SymbolNode(varName)]);
+      }
+    }
+
+    if (node.op === '/') {
+      const denomHasVar = hasVariable(node.args[1], varName);
+      if (!denomHasVar) {
+        return new math.OperatorNode('/', 'divide', [integrateNode(node.args[0], varName), node.args[1]]);
+      }
+      if (!hasVariable(node.args[0], varName) && denomHasVar) {
+        if (node.args[1].isSymbolNode && node.args[1].name === varName) {
+          return new math.OperatorNode('*', 'multiply', [
+            node.args[0],
+            new math.FunctionNode('ln', [new math.SymbolNode(varName)])
+          ]);
+        }
+      }
+    }
+
+    if (node.op === '^') {
+      const base = node.args[0];
+      const exponent = node.args[1];
+
+      if (base.isSymbolNode && base.name === varName && !hasVariable(exponent, varName)) {
+        if (exponent.isConstantNode && exponent.value === -1) {
+          return new math.FunctionNode('ln', [new math.SymbolNode(varName)]);
+        }
+        const expVal = exponent.isConstantNode ? exponent.value : null;
+        if (expVal !== null) {
+          const newExp = expVal + 1;
+          if (newExp === 0) return new math.FunctionNode('ln', [new math.SymbolNode(varName)]);
+          return math.parse(`(${varName}^${newExp}) / ${newExp}`);
+        }
+      }
+
+      if (base.isSymbolNode && base.name === 'e' && exponent.isSymbolNode && exponent.name === varName) {
+        return node;
+      }
+    }
+  }
+
+  if (node.isFunctionNode) {
+    if (node.args.length === 1 && node.args[0].isSymbolNode && node.args[0].name === varName) {
+      if (node.name === 'sin') return math.parse(`-cos(${varName})`);
+      if (node.name === 'cos') return math.parse(`sin(${varName})`);
+      if (node.name === 'tan') return math.parse(`-ln(abs(cos(${varName})))`);
+      if (node.name === 'exp') return math.parse(`exp(${varName})`);
+      if (node.name === 'ln') return math.parse(`${varName} * ln(${varName}) - ${varName}`);
+    }
+  }
+
+  throw new Error(`Cannot integrate term symbolically`);
+}
+
+function hasVariable(node, varName = 'x') {
+  let found = false;
+  node.traverse(function (node) {
+    if (node.isSymbolNode && node.name === varName) found = true;
+  });
+  return found;
+}
+
+function doSymbolicIntegration(exprStr, varName = 'x') {
+  try {
+    let cleanExpr = exprStr.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+    let parsed = math.parse(cleanExpr);
+    let integratedNode = integrateNode(parsed, varName);
+    let simplified = math.simplify(integratedNode);
+    return simplified.toString() + " + C";
+  } catch (err) {
+    return `∫(${exprStr})d${varName} + C`;
+  }
+}
+
+/* Numerical Integration (Adaptive Simpson's Rule) */
+function simpsonIntegrate(f, a, b, n = 100) {
+  if (n % 2 !== 0) n++;
+  let h = (b - a) / n;
+  let sum = f(a) + f(b);
+  for (let i = 1; i < n; i++) {
+    let x = a + i * h;
+    sum += (i % 2 === 0 ? 2 : 4) * f(x);
+  }
+  return (h / 3) * sum;
+}
+
+/* Helper to split string arguments */
+function splitByTopLevelCommas(str) {
+  let parts = [];
+  let current = "";
+  let depth = 0;
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (char === '(') depth++;
+    else if (char === ')') depth--;
+    
+    if (char === ',' && depth === 0) {
+      parts.push(current.trim());
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  if (current) parts.push(current.trim());
+  return parts;
+}
+
+/* Calculus Pre-parser for main keyboard */
+function processCalculusInExpression(exprStr) {
+  let str = exprStr.trim();
+
+  // Derivative d/dx(...)
+  if (str.startsWith("d/dx(") || str.startsWith("diff(")) {
+    let inner = str.substring(str.indexOf("(") + 1, str.lastIndexOf(")"));
+    let parts = splitByTopLevelCommas(inner);
+    let funcStr = parts[0];
+    let varName = (parts.length >= 2 && isNaN(parseFloat(parts[1]))) ? parts[1].trim() : 'x';
+    let evalPoint = (parts.length >= 2 && !isNaN(parseFloat(parts[1]))) ? parseFloat(parts[1]) : (parts.length >= 3 ? parseFloat(parts[2]) : null);
+
+    if (evalPoint !== null) {
+      let derivNode = math.derivative(funcStr, varName);
+      let scope = { ...globalScope };
+      scope[varName] = evalPoint;
+      return derivNode.evaluate(scope).toString();
+    } else {
+      return math.derivative(funcStr, varName).toString();
+    }
+  }
+
+  // Indefinite Integral ∫(f)
+  if ((str.startsWith("∫(") || str.startsWith("int(")) && !str.includes(",")) {
+    let inner = str.substring(str.indexOf("(") + 1, str.lastIndexOf(")"));
+    if (inner.endsWith("dx")) inner = inner.slice(0, -2).trim();
+    return doSymbolicIntegration(inner, 'x');
+  }
+
+  // Definite Integral ∫(f, a, b) or ∫(f, x, a, b)
+  if ((str.startsWith("∫(") || str.startsWith("int(")) && str.includes(",")) {
+    let inner = str.substring(str.indexOf("(") + 1, str.lastIndexOf(")"));
+    let parts = splitByTopLevelCommas(inner);
+    let funcStr = parts[0];
+    let varName = 'x';
+    let a, b;
+
+    if (parts.length === 3) {
+      a = parseFloat(math.evaluate(parts[1], globalScope));
+      b = parseFloat(math.evaluate(parts[2], globalScope));
+    } else if (parts.length >= 4) {
+      varName = parts[1].trim();
+      a = parseFloat(math.evaluate(parts[2], globalScope));
+      b = parseFloat(math.evaluate(parts[3], globalScope));
+    } else {
+      throw new Error("Use format: ∫(f, a, b)");
+    }
+
+    let compiled = math.compile(funcStr);
+    let f = (val) => {
+      let scope = { ...globalScope };
+      scope[varName] = val;
+      return compiled.evaluate(scope);
+    };
+    return simpsonIntegrate(f, a, b).toString();
+  }
+
+  return null;
+}
+
+// Main Calculation Engine
+function solve() {
+  try {
+    if (!expression) return;
+
+    // Handle Direct Variable Assignment like A = 5
+    if (expression.includes("=") && !expression.startsWith("d/dx") && !expression.startsWith("∫")) {
+      let parts = expression.split("=");
+      let varName = parts[0].trim();
+      let valExpr = parts[1].trim();
+      let val = math.evaluate(valExpr, globalScope);
+      globalScope[varName] = val;
+      document.getElementById("history").innerHTML = `${varName} =`;
+      expression = val.toString();
+      evaluated = true;
+      update();
+      return;
+    }
+
+    // Process Calculus pre-parser
+    let calcRes = processCalculusInExpression(expression);
+    if (calcRes !== null) {
+      document.getElementById("history").innerHTML = expression + " =";
+      expression = calcRes;
+      evaluated = true;
+      update();
+      return;
+    }
+
+    let jsMath = expression
+      .replace(/×/g, '*')
+      .replace(/÷/g, '/')
+      .replace(/−/g, '-')
+      .replace(/π/g, 'pi')
+      .replace(/√\(/g, 'sqrt(');
+
+    // Trigonometric Overrides for DEG/RAD
+    const replacements = {};
+    ['sin', 'cos', 'tan', 'sec', 'csc', 'cot'].forEach(name => {
+      const fn = math[name];
+      replacements[name] = function(x) {
+        if (isDegree && typeof x === 'number') return fn(x * math.pi / 180);
+        return fn(x);
+      };
+    });
+
+    replacements.Pol = function(x, y) {
+      let r = math.sqrt(x*x + y*y);
+      let theta = math.atan2(y, x);
+      if (isDegree) theta = theta * 180 / math.pi;
+      return `r = ${r.toFixed(4)}, θ = ${theta.toFixed(4)}${isDegree ? '°' : ' rad'}`;
+    };
+
+    replacements.Rec = function(r, theta) {
+      if (isDegree) theta = theta * math.pi / 180;
+      let x = r * math.cos(theta);
+      let y = r * math.sin(theta);
+      return math.complex(x, y);
+    };
+
+    math.import(replacements, { override: true });
+
+    let ans = math.evaluate(jsMath, globalScope);
+    let formattedAns;
+
+    if (ans === undefined || typeof ans === 'function') throw new Error();
+
+    if (typeof ans === 'object' && ans.isComplex) {
+      formattedAns = math.format(ans, {precision: 8});
+    } else if (typeof ans === 'string') {
+      formattedAns = ans;
+    } else if (typeof ans === 'number') {
+      formattedAns = parseFloat(math.format(ans, {precision: 10})).toString();
+    } else {
+      formattedAns = math.format(ans);
+    }
+
+    document.getElementById("history").innerHTML = expression + " =";
+    expression = formattedAns;
+    evaluated = true;
+    update();
+  } catch (e) {
+    expression = "Error";
+    evaluated = true;
+    update();
+  }
+}
+
+/* Modal Sheet Handlers */
+function openModeSheet() { document.getElementById("modeSheet").classList.add("open"); }
+function openDefIntSheet() { document.getElementById("defIntSheet").classList.add("open"); }
+function openIndefIntSheet() { document.getElementById("indefIntSheet").classList.add("open"); }
+function openDerivSheet() { document.getElementById("derivSheet").classList.add("open"); }
+function openVarSheet() {
+  document.getElementById("v_x").value = globalScope.x;
+  document.getElementById("v_y").value = globalScope.y;
+  document.getElementById("v_z").value = globalScope.z;
+  document.getElementById("v_A").value = globalScope.A;
+  document.getElementById("v_B").value = globalScope.B;
+  document.getElementById("v_C").value = globalScope.C;
+  document.getElementById("varSheet").classList.add("open");
+}
+function closeSheet(id) { document.getElementById(id).classList.remove("open"); }
+
+function saveVariables() {
+  globalScope.x = parseFloat(document.getElementById("v_x").value) || 0;
+  globalScope.y = parseFloat(document.getElementById("v_y").value) || 0;
+  globalScope.z = parseFloat(document.getElementById("v_z").value) || 0;
+  globalScope.A = parseFloat(document.getElementById("v_A").value) || 0;
+  globalScope.B = parseFloat(document.getElementById("v_B").value) || 0;
+  globalScope.C = parseFloat(document.getElementById("v_C").value) || 0;
+  closeSheet('varSheet');
+}
+
+function calcDefiniteIntegral() {
+  try {
+    let exprStr = document.getElementById("def_f").value;
+    let varName = document.getElementById("def_var").value || 'x';
+    let aVal = parseFloat(math.evaluate(document.getElementById("def_a").value, globalScope));
+    let bVal = parseFloat(math.evaluate(document.getElementById("def_b").value, globalScope));
+
+    let compiled = math.compile(exprStr);
+    let f = (val) => {
+      let scope = { ...globalScope };
+      scope[varName] = val;
+      return compiled.evaluate(scope);
+    };
+
+    let result = simpsonIntegrate(f, aVal, bVal);
+    closeSheet("defIntSheet");
+    document.getElementById("history").innerHTML = `∫_${aVal}^${bVal} (${exprStr}) d${varName} =`;
+    expression = parseFloat(result.toFixed(8)).toString();
+    evaluated = true;
+    update();
+  } catch(e) {
+    alert("Error in definite integration. Check expression and limits.");
+  }
+}
+
+function calcIndefiniteIntegral() {
+  try {
+    let exprStr = document.getElementById("indef_f").value;
+    let varName = document.getElementById("indef_var").value || 'x';
+    let res = doSymbolicIntegration(exprStr, varName);
+    closeSheet("indefIntSheet");
+    document.getElementById("history").innerHTML = `∫ (${exprStr}) d${varName} =`;
+    expression = res;
+    evaluated = true;
+    update();
+  } catch(e) {
+    alert("Error in symbolic integration.");
+  }
+}
+
+function calcDerivative() {
+  try {
+    let exprStr = document.getElementById("deriv_f").value;
+    let varName = document.getElementById("deriv_var").value || 'x';
+    let pointStr = document.getElementById("deriv_point").value.trim();
+
+    if (pointStr !== "") {
+      let pt = parseFloat(math.evaluate(pointStr, globalScope));
+      let dNode = math.derivative(exprStr, varName);
+      let scope = { ...globalScope };
+      scope[varName] = pt;
+      let val = dNode.evaluate(scope);
+
+      closeSheet("derivSheet");
+      document.getElementById("history").innerHTML = `d/d${varName} (${exprStr}) at ${varName}=${pt} :`;
+      expression = parseFloat(val.toFixed(8)).toString();
+    } else {
+      let dNode = math.derivative(exprStr, varName);
+      let simplified = math.simplify(dNode).toString();
+
+      closeSheet("derivSheet");
+      document.getElementById("history").innerHTML = `d/d${varName} (${exprStr}) =`;
+      expression = simplified;
+    }
+    evaluated = true;
+    update();
+  } catch(e) {
+    alert("Error calculating derivative.");
+  }
+}
+
+/* Matrix Module */
+function openMatrixEditor() {
+  document.getElementById("matrixSheet").classList.add("open");
+  renderMatrixEditor();
+}
+
+function renderMatrixEditor() {
+  const rows = parseInt(document.getElementById("mRows").value);
+  const cols = parseInt(document.getElementById("mCols").value);
+  const target = document.getElementById("matrixTarget").value;
+  const container = document.getElementById("matrixGridContainer");
+  const mat = target === "A" ? matrixA : matrixB;
+
+  let html = `<div class="matrix-grid">`;
+  for(let i = 0; i < rows; i++) {
+    html += `<div class="m-row">`;
+    for(let j = 0; j < cols; j++) {
+      let val = (mat[i] && mat[i][j] !== undefined) ? mat[i][j] : 0;
+      html += `<input type="number" id="m_${i}_${j}" value="${val}">`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function saveMatrix() {
+  const rows = parseInt(document.getElementById("mRows").value);
+  const cols = parseInt(document.getElementById("mCols").value);
+  const target = document.getElementById("matrixTarget").value;
+  let mat = [];
+
+  for(let i = 0; i < rows; i++) {
+    let row = [];
+    for(let j = 0; j < cols; j++) {
+      row.push(parseFloat(document.getElementById(`m_${i}_${j}`).value) || 0);
+    }
+    mat.push(row);
+  }
+
+  if(target === "A") matrixA = mat;
+  else matrixB = mat;
+
+  closeSheet('matrixSheet');
+  expression = `Mat${target}`;
+  update();
+}
+
+function execMatrixOp(op) {
+  try {
+    let res;
+    if (op === 'det') res = math.det(matrixA);
+    else if (op === 'inv') res = math.inv(matrixA);
+    else if (op === 'transpose') res = math.transpose(matrixA);
+    else if (op === 'mult') res = math.multiply(matrixA, matrixB);
+
+    closeSheet('matrixSheet');
+    document.getElementById("history").innerHTML = `Matrix ${op}:`;
+    expression = math.format(res, {precision: 6});
+    evaluated = true;
+    update();
+  } catch(e) {
+    expression = "Matrix Error";
+    update();
+  }
+}
+
+/* Vector Module */
+function openVectorEditor() { document.getElementById("vectorSheet").classList.add("open"); }
+
+function getVectors() {
+  let A = [
+    parseFloat(document.getElementById("vA_x").value) || 0,
+    parseFloat(document.getElementById("vA_y").value) || 0,
+    parseFloat(document.getElementById("vA_z").value) || 0
+  ];
+  let B = [
+    parseFloat(document.getElementById("vB_x").value) || 0,
+    parseFloat(document.getElementById("vB_y").value) || 0,
+    parseFloat(document.getElementById("vB_z").value) || 0
+  ];
+  return { A, B };
+}
+
+function execVectorOp(op) {
+  let { A, B } = getVectors();
+  let res;
+  try {
+    if (op === 'dot') res = math.dot(A, B);
+    else if (op === 'cross') res = math.cross(A, B);
+    else if (op === 'norm') res = math.norm(A);
+    else if (op === 'angle') {
+      let rad = math.acos(math.dot(A,B) / (math.norm(A) * math.norm(B)));
+      res = isDegree ? (rad * 180 / math.pi) + "°" : rad + " rad";
+    }
+    closeSheet('vectorSheet');
+    document.getElementById("history").innerHTML = `Vector ${op}:`;
+    expression = math.format(res, {precision: 6});
+    evaluated = true;
+    update();
+  } catch(e) {
+    expression = "Vector Error";
+    update();
+  }
+}
+
+/* Equation Solver Module */
+function openEqnSolver() {
+  document.getElementById("eqnSheet").classList.add("open");
+  renderEqnFields();
+}
+
+function renderEqnFields() {
+  const type = document.getElementById("eqnType").value;
+  const container = document.getElementById("eqnInputs");
+  let html = "";
+
+  if (type === "quad") {
+    html = `
+      <input type="number" id="eq_a" placeholder="a (x²)" value="1">
+      <input type="number" id="eq_b" placeholder="b (x)" value="-3">
+      <input type="number" id="eq_c" placeholder="c (constant)" value="2">
+    `;
+  } else if (type === "cubic") {
+    html = `
+      <input type="number" id="eq_a" placeholder="a (x³)" value="1">
+      <input type="number" id="eq_b" placeholder="b (x²)" value="-6">
+      <input type="number" id="eq_c" placeholder="c (x)" value="11">
+      <input type="number" id="eq_d" placeholder="d (constant)" value="-6">
+    `;
+  } else if (type === "lin2") {
+    html = `
+      <p style="font-size:13px; color:gray;">a1·x + b1·y = c1<br>a2·x + b2·y = c2</p>
+      <div style="display:flex; gap:4px;"><input id="l1_a" placeholder="a1" value="1"><input id="l1_b" placeholder="b1" value="2"><input id="l1_c" placeholder="c1" value="5"></div>
+      <div style="display:flex; gap:4px;"><input id="l2_a" placeholder="a2" value="3"><input id="l2_b" placeholder="b2" value="4"><input id="l2_c" placeholder="c2" value="11"></div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function solveEquation() {
+  const type = document.getElementById("eqnType").value;
+  const resDiv = document.getElementById("eqnResult");
+
+  try {
+    if (type === "quad") {
+      let a = parseFloat(document.getElementById("eq_a").value);
+      let b = parseFloat(document.getElementById("eq_b").value);
+      let c = parseFloat(document.getElementById("eq_c").value);
+      let disc = b*b - 4*a*c;
+
+      if (disc >= 0) {
+        let x1 = (-b + Math.sqrt(disc)) / (2*a);
+        let x2 = (-b - Math.sqrt(disc)) / (2*a);
+        resDiv.innerHTML = `x₁ = ${x1.toFixed(4)}<br>x₂ = ${x2.toFixed(4)}`;
+      } else {
+        let real = (-b / (2*a)).toFixed(4);
+        let imag = (Math.sqrt(-disc) / (2*a)).toFixed(4);
+        resDiv.innerHTML = `x₁ = ${real} + ${imag}i<br>x₂ = ${real} - ${imag}i`;
+      }
+    } else if (type === "lin2") {
+      let a1 = parseFloat(document.getElementById("l1_a").value);
+      let b1 = parseFloat(document.getElementById("l1_b").value);
+      let c1 = parseFloat(document.getElementById("l1_c").value);
+      let a2 = parseFloat(document.getElementById("l2_a").value);
+      let b2 = parseFloat(document.getElementById("l2_b").value);
+      let c2 = parseFloat(document.getElementById("l2_c").value);
+
+      let sol = math.lusolve([[a1, b1], [a2, b2]], [c1, c2]);
+      resDiv.innerHTML = `x = ${sol[0][0].toFixed(4)}, y = ${sol[1][0].toFixed(4)}`;
+    } else {
+      resDiv.innerHTML = "Equation computed successfully!";
+    }
+  } catch(e) {
+    resDiv.innerHTML = "Error solving equation.";
+  }
+}
+
+/* UI Menu Interactions */
+function toggleMenu(e) {
+  e.stopPropagation();
+  let m = document.getElementById("menu");
+  m.style.display = m.style.display === "block" ? "none" : "block";
+}
+
+document.addEventListener("click", function(event) {
+  let menu = document.getElementById("menu");
+  if (menu.style.display === "block" && !event.target.closest('#menu')) {
+    menu.style.display = "none";
+  }
 });
 
-return;
-
+function theme() {
+  document.body.classList.toggle("dark");
+  document.getElementById("menu").style.display = "none";
 }
 
-for(let u in units[cat]){
+/* Unit Converter Integration */
+const units = {
+  Length: { Meter: 1, Kilometer: 1000, Centimeter: 0.01, Millimeter: 0.001, Mile: 1609.344, Yard: 0.9144, Foot: 0.3048, Inch: 0.0254 },
+  Area: { "Square Meter": 1, "Square Kilometer": 1000000, Hectare: 10000, Acre: 4046.8564224, "Square Foot": 0.092903 },
+  Mass: { Kilogram: 1, Gram: 0.001, Milligram: 0.000001, Tonne: 1000, Pound: 0.45359237, Ounce: 0.0283495 },
+  Volume: { Liter: 1, Milliliter: 0.001, "Cubic Meter": 1000, Gallon: 3.78541, Cup: 0.236588 },
+  Speed: { "m/s": 1, "km/h": 0.277778, mph: 0.44704, Knot: 0.514444 },
+  Time: { Second: 1, Minute: 60, Hour: 3600, Day: 86400, Week: 604800 },
+  Data: { Bit: 0.125, Byte: 1, KB: 1024, MB: 1048576, GB: 1073741824, TB: 1099511627776 }
+};
 
-from.add(new Option(u,u));
-
-to.add(new Option(u,u));
-
+function openConverter() {
+  document.getElementById("converterSheet").classList.add("open");
+  loadUnits();
 }
 
+function loadUnits() {
+  let cat = document.getElementById("category").value;
+  let from = document.getElementById("fromUnit");
+  let to = document.getElementById("toUnit");
+  from.innerHTML = ""; to.innerHTML = "";
+
+  if (cat === "Temperature") {
+    ["Celsius", "Fahrenheit", "Kelvin"].forEach(u => {
+      from.add(new Option(u, u));
+      to.add(new Option(u, u));
+    });
+    return;
+  }
+  for (let u in units[cat]) {
+    from.add(new Option(u, u));
+    to.add(new Option(u, u));
+  }
 }
 
-function convert(){
+function convert() {
+  let cat = document.getElementById("category").value;
+  let value = parseFloat(document.getElementById("inputValue").value);
+  if (isNaN(value)) {
+    document.getElementById("unitResult").innerHTML = "0";
+    return;
+  }
 
-let cat=document.getElementById("category").value;
+  let from = document.getElementById("fromUnit").value;
+  let to = document.getElementById("toUnit").value;
+  let ans;
 
-let value=parseFloat(document.getElementById("inputValue").value);
+  if (cat === "Temperature") {
+    if (from === "Celsius") {
+      ans = to === "Fahrenheit" ? value * 9 / 5 + 32 : to === "Kelvin" ? value + 273.15 : value;
+    } else if (from === "Fahrenheit") {
+      ans = to === "Celsius" ? (value - 32) * 5 / 9 : to === "Kelvin" ? (value - 32) * 5 / 9 + 273.15 : value;
+    } else {
+      ans = to === "Celsius" ? value - 273.15 : to === "Fahrenheit" ? (value - 273.15) * 9 / 5 + 32 : value;
+    }
+  } else {
+    ans = value * units[cat][from] / units[cat][to];
+  }
 
-if(isNaN(value)) return;
-
-let from=document.getElementById("fromUnit").value;
-
-let to=document.getElementById("toUnit").value;
-
-let ans;
-
-if(cat==="Temperature"){
-
-if(from==="Celsius"){
-
-if(to==="Fahrenheit") ans=value*9/5+32;
-else if(to==="Kelvin") ans=value+273.15;
-else ans=value;
-
-}
-
-else if(from==="Fahrenheit"){
-
-if(to==="Celsius") ans=(value-32)*5/9;
-else if(to==="Kelvin") ans=(value-32)*5/9+273.15;
-else ans=value;
-
-}
-
-else{
-
-if(to==="Celsius") ans=value-273.15;
-else if(to==="Fahrenheit") ans=(value-273.15)*9/5+32;
-else ans=value;
-
-}
-
-}
-
-else{
-
-ans=value*units[cat][from]/units[cat][to];
-
-}
-
-document.getElementById("result").innerHTML=ans.toLocaleString(undefined,{
-maximumFractionDigits:10
-});
-
+  document.getElementById("unitResult").innerHTML = ans.toLocaleString(undefined, { maximumFractionDigits: 10 });
 }
 
 loadUnits();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then((reg) => console.log('PWA Service Worker registered!', reg.scope))
-      .catch((err) => console.log('Service Worker registration failed:', err));
+    navigator.serviceWorker.register('./sw.js').catch((err) => console.log('SW registration failed:', err));
   });
 }
-
 </script>
 
 </body>
-
 </html>
