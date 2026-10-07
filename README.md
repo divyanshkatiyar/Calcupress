@@ -1,4 +1,4 @@
-# 🧮 CalcuPress
+# 🌐 **[CalcuPress](https://divyanshkatiyar.github.io/Calcupress/)**
 
 **Material You Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
 
@@ -7,8 +7,6 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) 
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-
-## 🌐 **Live Demo:** **[Click Here](https://divyanshkatiyar.github.io/Calcupress/)**
 
 ---
 
