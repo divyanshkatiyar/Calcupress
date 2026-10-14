@@ -1,12 +1,17 @@
 # 🌐 **[CalcuPress](https://divyanshkatiyar.github.io/Calcupress/)**
 
-**Material You Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
+**Material-You Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white) 
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white) 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) 
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
+### ⚠️ PROPRIETARY & SOURCE-AVAILABLE
+**Copyright © 2026 Divyansh Katiyar. All Rights Reserved.**
+This software is strictly proprietary. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice]()**
+
 
 ---
 
