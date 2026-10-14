@@ -8,9 +8,9 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-### ⚠️ PROPRIETARY & SOURCE-AVAILABLE
+### ⚠️ PROPRIETARY SOFTWARE 
 **Copyright © 2026 Divyansh Katiyar. All Rights Reserved.**
-This software is strictly proprietary. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice]()**
+> This software is strictly proprietary. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
 
 
 ---
