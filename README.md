@@ -1,4 +1,4 @@
-# 🌐 **[CalcuPress](https://divyanshkatiyar.github.io/Calcupress/)**
+# 🌐 **[CalcuPress™](https://divyanshkatiyar.github.io/Calcupress/)**
 
 **Material-You Expressive Scientific Calculator & Unit Converter** built using **HTML, CSS, and JavaScript**.
 
