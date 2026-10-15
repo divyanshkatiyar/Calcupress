@@ -11,7 +11,7 @@
 ### ⚠️ STRICTLY PROPRIETARY SOFTWARE 
 **Copyright © 2026 Divyansh Katiyar | CalcuPress — All Rights Reserved.**
 > CalcuPress™ is strictly proprietary software owned by Divyansh Katiyar. Access is granted solely for personal use. Any unauthorized copying, modification, reproduction, redistribution, or commercial use of the software is strictly prohibited.
-Unauthorized copying, reproduction, imitation, or use of the CalcuPress™ name, trademarks, logos, graphics, visual assets, or other proprietary branding is illegal. Access to the software does not grant permission to view, copy, extract, download, reproduce, or redistribute its source code or to reverse engineer, decompile, or otherwise attempt to derive its underlying source code or implementation.
+Unauthorized copying, reproduction, imitation, or use of the CalcuPress™ name, trademarks, logos, graphics, visual assets, or other proprietary branding is illegal. Access to the software does not grant permission to view, copy, store, host, extract, download, reproduce, or redistribute its source code or to reverse engineer, decompile, or otherwise attempt to derive its underlying source code or implementation.
 
 Violations of the above said terms is subject to legal action under applicable laws and the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
 
