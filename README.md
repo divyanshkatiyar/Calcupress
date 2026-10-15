@@ -8,9 +8,13 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-### ⚠️ PROPRIETARY SOFTWARE 
+### ⚠️ STRICTLY PROPRIETARY SOFTWARE 
 **Copyright © 2026 Divyansh Katiyar. All Rights Reserved.**
-> Calcupress™ is a strictly proprietary software. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
+> CalcuPress™ is strictly proprietary software. Access is granted solely for personal use. Any unauthorized copying, modification, reproduction, redistribution, or commercial use of the software is strictly prohibited.
+
+Unauthorized copying, reproduction, imitation, or use of the CalcuPress™ name, trademarks, logos, graphics, visual assets, or other proprietary branding is prohibited. Access to the software does not grant permission to copy, extract, download, reproduce, or redistribute its source code or to reverse engineer, decompile, or otherwise attempt to derive its underlying source code or implementation.
+
+Violations of these restrictions may result in legal action under applicable law and the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
 
 
 ---
