@@ -10,7 +10,7 @@
 
 ### ⚠️ PROPRIETARY SOFTWARE 
 **Copyright © 2026 Divyansh Katiyar. All Rights Reserved.**
-> This software is strictly proprietary. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
+> Calcupress™ is a strictly proprietary software. Access is granted solely for personal evaluation and educational review; any unauthorized copying, modification, redistribution, or commercial use is legally prohibited under the full **[Proprietary Software & Copyright Notice](https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE)**
 
 
 ---
@@ -39,7 +39,7 @@
 
 ---
 
-Calcupress combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a ⚡️ blazing-fast, lightweight, responsive, and user-friendly experience—all offline on any device 📥.
+Calcupress™ combines an elegant **Material You**-inspired interface with powerful **scientific calculations** and an **all-in-one unit converter**, delivering a ⚡️ blazing-fast, lightweight, responsive, and user-friendly experience—all offline on any device 📥.
 > No frameworks. No libraries. No dependencies.
 
 ---
