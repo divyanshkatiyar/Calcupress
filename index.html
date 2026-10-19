@@ -395,26 +395,80 @@ button.menu-btn {
 }
 
 .license-title {
-  margin-bottom: 14px;
+  margin-bottom: 9px;
   color: var(--primary);
-  font-size: clamp(19px, 4.8vw, 23px);
-  line-height: 1.3;
+  font-size: clamp(17px, 4.2vw, 19px);
+  line-height: 1.22;
   font-weight: 800;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.15px;
 }
 
 .license-copyright {
-  margin-bottom: 16px;
-  font-size: 14px;
-  line-height: 1.55;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.4;
   font-weight: 700;
 }
 
 .license-copy {
-  margin-bottom: 24px;
-  font-size: 14px;
-  line-height: 1.7;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.48;
   overflow-wrap: anywhere;
+}
+
+/* Compact restriction and legal-warning blocks */
+.license-notice {
+  margin: 0 0 9px;
+  padding: 10px 11px;
+  border-radius: 13px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* Yellow / amber restriction block */
+.license-restrictions {
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(202, 138, 4, 0.38);
+}
+
+.license-notice-title {
+  display: block;
+  margin-bottom: 4px;
+  color: #a16207;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.license-restrictions p,
+.license-legal p {
+  margin: 0;
+}
+
+/* Red legal-warning block */
+.license-legal {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+  background: rgba(220, 38, 38, 0.055);
+  border: 1px solid rgba(220, 38, 38, 0.24);
+}
+
+/* Small legal scales icon */
+.license-legal-icon {
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  color: #d96b80;
+}
+
+.license-legal p {
+  flex: 1;
+  min-width: 0;
 }
 
 .license-link {
@@ -812,18 +866,84 @@ button.menu-btn {
 
 <!-- Mandatory Proprietary Software disclaimer / access gate -->
 <div id="licenseGate" role="presentation">
-  <section class="license-card" role="dialog" tabindex="-1" aria-modal="true"
-           aria-labelledby="licenseTitle" aria-describedby="licenseDescription">
-    <h1 class="license-title" id="licenseTitle">⚠️ Strictly Proprietary Software</h1>
-    <p class="license-copyright">Copyright © 2026 CalcuPress | Divyansh Katiyar — All Rights Reserved.</p>
-    <p class="license-copy" id="licenseDescription">CalcuPress™ is a proprietary software owned by Divyansh Katiyar. Access is granted solely for personal use.
+  <section class="license-card" role="dialog" tabindex="-1"
+           aria-modal="true"
+           aria-labelledby="licenseTitle"
+           aria-describedby="licenseDescription licenseRestrictions licenseLegalDescription">
 
-Any unauthorized copying, modification, reproduction, redistribution, or commercial use of the software is strictly prohibited.
- 
-Unauthorized copying, reproduction, imitation, or use of the CalcuPress™ name, trademarks, logos, graphics, visual assets, or other proprietary branding is illegal. Access to the software does not grant permission to view, copy, extract, store, host, download, reproduce, or redistribute its source code or to reverse engineer, decompile, or otherwise attempt to derive its underlying source code or implementation.
+    <h1 class="license-title" id="licenseTitle">
+      ⚠️ STRICTLY PROPRIETARY SOFTWARE
+    </h1>
 
-Any violation of the above said terms is subject to legal action under applicable laws and the full <a class="license-link" href="https://raw.githubusercontent.com/divyanshkatiyar/Calcupress/main/LICENSE" target="_blank" rel="noopener noreferrer">&quot;Proprietary Software &amp; Copyright Notice&quot;</a>.</p>
-    <button class="license-agree" id="licenseAgreeBtn" type="button">I Understand &amp; Agree</button>
+    <p class="license-copyright">
+      Copyright © 2026 Divyansh Katiyar | CalcuPress — All Rights Reserved.
+    </p>
+
+    <p class="license-copy" id="licenseDescription">
+      CalcuPress™ is a proprietary software owned by Divyansh Katiyar.
+      Access is granted solely for personal use. Any unauthorized copying,
+      modification, reproduction, redistribution, or commercial use of the
+      software is strictly prohibited.
+    </p>
+
+    <!-- YELLOW / AMBER RESTRICTION BLOCK -->
+    <div class="license-notice license-restrictions"
+         id="licenseRestrictions">
+
+      <span class="license-notice-title">
+        ⚠️ Strictly Prohibited Actions:
+      </span>
+
+      <p>
+        Unauthorized copying, reproduction, imitation, or use of the
+        CalcuPress™ name, trademarks, logos, graphics, visual assets, or
+        other proprietary branding is illegal. Access to the software does
+        not grant permission to view, copy, extract, store, host, download,
+        reproduce, or redistribute its source code or to reverse engineer,
+        decompile, or otherwise attempt to derive its underlying source
+        code or implementation.
+      </p>
+
+    </div>
+
+    <!-- RED LEGAL-WARNING BLOCK -->
+    <div class="license-notice license-legal"
+         id="licenseLegalDescription">
+
+      <svg class="license-legal-icon"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.8"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           aria-hidden="true"
+           focusable="false">
+
+        <path d="m16 16 3-8 3 8c-.8.7-1.7 1-3 1s-2.2-.3-3-1Z"/>
+        <path d="m2 16 3-8 3 8c-.8.7-1.7 1-3 1s-2.2-.3-3-1Z"/>
+        <path d="M7 21h10M12 3v18M3 7h2c2 0 4-1 7-4 3 3 5 4 7 4h2"/>
+
+      </svg>
+
+      <p>
+        Any violation of the above said terms is subject to legal action
+        under applicable laws and the full
+        <a class="license-link"
+           href="https://github.com/divyanshkatiyar/Calcupress/blob/main/LICENSE"
+           target="_blank"
+           rel="noopener noreferrer">&quot;Proprietary Software &amp;
+          Copyright Notice&quot;</a>.
+      </p>
+
+    </div>
+
+    <button class="license-agree"
+            id="licenseAgreeBtn"
+            type="button">
+      I Understand &amp; Agree
+    </button>
+
   </section>
 </div>
 
