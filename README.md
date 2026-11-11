@@ -113,14 +113,6 @@ CalcuPress/
 
 ---
 
-## 🤝 Contributing
-
-Contributions, feature requests, and bug reports are always welcome!
-
-If you'd like to improve CalcuPress, feel free to fork the repository and submit a pull request.
-
----
-
 ## 📄 License
 
 Detailed license can be viewed **[here](https://github.com/divyanshkatiyar/Calcupress?tab=License-1-ov-file#)**.
