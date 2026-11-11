@@ -55,8 +55,12 @@ Calcupress™ combines an elegant **Material You**-inspired interface with power
 - 𝐃𝐞𝐝𝐢𝐜𝐚𝐭𝐞𝐝 𝐌𝐨𝐝𝐞 𝐒𝐰𝐢𝐭𝐜𝐡𝐞𝐫 𝐌𝐞𝐧𝐮: Quick-access navigation menu to toggle seamlessly between Scientific, Matrix/Vector, Complex, Calculus, and Unit Conversion
 - 𝐃𝐞𝐠 / 𝐑𝐚𝐝 𝐌𝐨𝐝𝐞 𝐓𝐨𝐠𝐠𝐥𝐞: Instant angular unit switching with state indicators for trigonometric calculations
 - 𝐒𝐡𝐢𝐟𝐭 𝐭𝐨𝐠𝐠𝐥𝐞 : Shift instantly between trignometric, inverse trignometric & hyperbolic functions like a physical calculator.
+- 🗑 𝐂𝐚𝐥𝐜𝐮𝐥𝐚𝐭𝐢𝐨𝐧 𝐇𝐢𝐬𝐭𝐨𝐫𝐲 :
+- 📈 𝐆𝐫𝐚𝐩𝐡 𝐏𝐥𝐨𝐭𝐭𝐞𝐫 :
 
-• 🧮 **Scientific Calculator**
+---
+
+### 🧮 **Scientific Calculator**
 - ➕ Basic arithmetic operations
 - 📐 Trigonometric & inverse trignometric functions
 - √ Square root, modulus |x|, 
@@ -101,13 +105,10 @@ CalcuPress/
 
 ## 🎯 Future Plans
 
-- 📈 Graph Plotter
 - 📊 Statistics Calculator
 - 💱 Currency Converter
 - 📅 Date Calculator
 - 🧪 Programmer Mode
-- 🧠 Equation Solver
-- 📜 Calculation History
 - ⌨️ Keyboard Shortcuts
 - 🎙️ Voice Input
 
